@@ -13,4 +13,8 @@
 Departments have a professor known as the chairman who runs the department.
 * Departments have a department number, a department name, and a main office.
 * Departments have a professor known as the chairman who runs the department
-* 
+* Professors work in one or more departments, and for each department that they
+  work in, a time percentage is associateed with their job
+* Graduate students have one major department in which they are working on their
+  degree each graduate students have anothe more senior graduate student, wh
+adivces on them on what courses to take.
