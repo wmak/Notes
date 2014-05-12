@@ -1,3 +1,4 @@
+Consider the following info about the university info
 * Professors have an SSN, a name, an age, a rank and a research specialty
 * Projects have a project number, a sponsor name, a starting date, an ending
   date, and a budget
