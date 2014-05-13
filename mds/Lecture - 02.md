@@ -28,4 +28,8 @@
 	* If you work hard enough the opportunity is there for you to become wealthy
 	  to succeed you just have to work hard enough to do that.
 
-
+* Work in capitalist societies alienates people, more one works the more
+  alienation
+* happy shopper
+	* people who enjoy shopping
+	* this is what advestiresrs are describing it's consumers as
