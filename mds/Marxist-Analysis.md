@@ -33,3 +33,4 @@
 * happy shopper
 	* people who enjoy shopping
 	* this is what advestiresrs are describing it's consumers as
+
