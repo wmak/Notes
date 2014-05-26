@@ -7,6 +7,7 @@
 * Double rectangle/diamond = _weak_ entity set
 	* A weak set is when the keys come from other entity sets that it is linked
 	  to.
+* Dashed box = Aggregate
 * Don't allow multiple inheritance to avoid the problems that come with that
 
 ## Keys
