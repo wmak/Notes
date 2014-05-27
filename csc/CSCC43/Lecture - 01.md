@@ -1,4 +1,5 @@
 # Lecture 01
+[course website](http://queens.db.toronto.edu/~koudas/courses/csc43/csc43.htm)
 
 ## ER Modeling
 Entity Relationship Model
