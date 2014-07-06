@@ -10,7 +10,7 @@
 		* Measuring and analyzing he physical properties of the sound waves
 		  produced in speech
 * English is terrible with it's representation of sound.
-	* r*ough* vs thr*ough* vs th*ough*
+	* r<b>ough</b> vs thr<b>ough</b> vs th<b>ough</b>
 * In order to overcome this issue a universal system has been devised
 * This is known as the **International Phonetic Alphabet** (**IPA**)
 * It's purpose is to represent each sound of human speech with a single symbol
@@ -18,8 +18,8 @@
 	* These symbols are enclosed into square brackets.
 
 ## Phonetic Transcription
-* In english the sound spelled as *th* (ie in **th**is or **th**at) is
-  transcribed using &#240; 
+* In english the sound spelled as <b>th</b> (ie in <b>th</b>is or <b>th</b>at)
+  is transcribed using &#240; 
 * phones are split into three major classes
 	* Vowels
 	* Consonants
@@ -35,10 +35,10 @@
 * **Labial**
 	* *Bilabial* sounds [m] [p] [b].
 		* Sounds produced with the two lips.
-		* ex. *m*it, *p*it, and *b*it
+		* ex. <b>m</b>it, <b>p</b>it, and <b>b</b>it
 	* *labiodentals* sounds [f] and [v]
 		* sounds produced with the lip and the teeth.
-		* ex. *f*ish and *v*est
+		* ex. <b>f</b>ish and <b>v</b>est
 * **Dental and Interdental**
 	* *Interdental* sound [&#240;]
 		* sound porduced with the tongue between the teeth
