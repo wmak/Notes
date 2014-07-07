@@ -40,7 +40,7 @@
 		* sounds produced with the lip and the teeth.
 		* ex. <b>f</b>ish and <b>v</b>est
 * **Dental and Interdental**
-	* *Interdental* sound [&#240;]
+	* *Interdental* sound [&#240;] and [&#952;]
 		* sound porduced with the tongue between the teeth
 	* *Dental* is anything to do with the teeth.
 * **Alveolars**
@@ -49,17 +49,19 @@
 	* These symbols
 		* [n], [t], [d], [s], [z], [l]
 	* Exmaples
-		* nip, tip, dig, sip, zip, lip
+		* <b>n</b>ip, <b>t</b>ip, <b>d</b>ig, <b>s</b>ip, <b>z</b>ip, <b>l</b>ip
 * **Alveopalatal**
 	* Sounds where the tongue moves right behind the alveolar ridge
 	* These symbols
 		* [&#658;] and [&#643;]
+	* Examples
+		* <b>sh</b>ip, mea<b>s</b>ure, <b>ch</b>ip, <b>j</b>u<b>dg</b>e
 * **Velar**
 	* Sounds further back in the mouth
 	* These sounds are called velars 
 		* [&#331;], [k], [g]
 	* Examples
-		* Sing, Stick, Twig
+		* Si<b>ng</b>, Sti<b>ck</b>, Twi<b>g</b>
 * **Uvular**
 	* Sounds at the very back of the throat
 	* English does not have a sound pronounced here
@@ -67,4 +69,14 @@
 	* sounds produced using the vocal folds
 	* Examples
 		* Heave, Hog, Better, Bottle
-	
+
+### Manner of articulation
+* Another basic distinction in the manner of articulationo
+* When sound is cut off from the nasal passages **oral** sounds are produced.
+* **nasal** sounds are articulated when the velum is lowered and air passes
+  through the nasal passages.
+	* For example [n] is nasal while [t] is not (can, cat)
+* **stops** sounds are produced by stopping airflow.
+	* Examples
+		* [t], [t], [k], [b], [d], [g], [m], [n], [&#331;]
+		* bi<b>t</b> and bi<b>d</b>
