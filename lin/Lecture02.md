@@ -106,3 +106,12 @@
 	* [l] like in **liquids**
 	* there's also a dark l or velarized l
 		* represented with l&#820;
+* **English Rs**
+	* [r]
+	* *retroflex* r
+		* <b>r</b>ide or ca<b>r</b>
+	* *flap* r
+		* bu<b>tt</b>er or bi<b>tt</b>er 
+* **Glides**
+	* [j] found in words like <b>y</b>ou
+	* [w] like in <b>wh</b>at
