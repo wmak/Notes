@@ -73,10 +73,36 @@
 ### Manner of articulation
 * Another basic distinction in the manner of articulationo
 * When sound is cut off from the nasal passages **oral** sounds are produced.
-* **nasal** sounds are articulated when the velum is lowered and air passes
-  through the nasal passages.
+* **nasal** 
+	* sounds are articulated when the velum is lowered and air passes
+	  through the nasal passages.
 	* For example [n] is nasal while [t] is not (can, cat)
-* **stops** sounds are produced by stopping airflow.
+* **stops** 
+	* sounds are produced by stopping airflow.
 	* Examples
 		* [t], [t], [k], [b], [d], [g], [m], [n], [&#331;]
 		* bi<b>t</b> and bi<b>d</b>
+* **continuants**
+	* The airflow of the mouth is not stopped
+	* Examples
+		* [s], [z]
+		* fi<b>tt</b>ing vs fi<b>zz</b>ing
+* **fricatives**
+	* Noisy friction on air
+	* English Fricatives
+		* [f], [&#952;], [s], [&#643;], [h], [v], [&#240;], [z], [&#658;]
+* **afficates**
+	* Producing a stop which is immediately followed by a slow release of the
+	  closure.
+	* English only has two Affricates
+		* [t&#643;] like in <b>ch</b>ur<b>ch</b>
+		* [d&#658;] like in <b>j</b>u<b>dge</b>
+* **Stridents/Sibilants**
+	* The nosier fricatives are called stridents
+		* [s] or [z]
+	* the quieter ones are known as non-stridents
+		* [&#952;] or [&#240;]
+* **Liquids**
+	* [l] like in **liquids**
+	* there's also a dark l or velarized l
+		* represented with &#820;l
