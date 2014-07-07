@@ -105,4 +105,4 @@
 * **Liquids**
 	* [l] like in **liquids**
 	* there's also a dark l or velarized l
-		* represented with &#820;l
+		* represented with l&#820;
