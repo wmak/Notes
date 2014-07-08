@@ -69,7 +69,7 @@
 * Dissimilation
 	* Segment Deletion and insertion
 		* parade - [p&#601;red] becomes [pred]
-		* suppose - [s&#601poz] becomes [spoz]
+		* suppose - [s&#601;poz] becomes [spoz]
 	* Segment insertion is called: **Epenthesis**
 		* `warmth` [worm&#952;] becomes [wormp&#952;]
 	* Moving phonemes around is called: **Metathesis**
