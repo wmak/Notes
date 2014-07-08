@@ -46,7 +46,7 @@
 	* [u] boot
 	* [&#650;] put
 	* [o] boat
-	* [&#593;] cot
+	* [&#593;] bot
 * Central Vowels
 	* stressed: [&#652;] but/putt
 	* unstressed: [&#601;] sof<b>a</b>/tel<b>e</b>phone
