@@ -1,0 +1,123 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\geometry{paperwidth=170mm, paperheight=2383pt, left=40pt, top=40pt, textwidth=280pt, marginparsep=20pt, marginparwidth=100pt, textheight=16263pt, footskip=40pt}
+\setcounter{totalnumber}{100}
+
+\title{L04}
+\author{William Mak}
+\date{September 17 2014}
+
+\begin{document}
+
+\maketitle
+
+\section{Divide and Conquer Algorithms}
+    KT Chapter 5, DPV Chapter 2
+    
+    To solve instance of size n of problem:\\
+    if n is "small": use brute force\\
+    else: 
+\begin{enumerate}
+    \item split instance into a instances of same prbjem each of size $n/b,(a>=1, b>1 are constants)$
+    \item Recursively solve smaller instances
+    \item combine solutions of smaller instances to obtain solution of original instance
+\end{enumerate}
+
+\subsection{Master Theorem}
+We're interested in the running time of a Divide and Conquer algorithm.\\
+Let's examine the Running time of Mergesort:\\
+
+
+$T(n) \to$ Time for instances of size n\\
+$T(n) = 2 \times T (n/2) + c\times n$\\
+It can then be shown that $T(n) = \theta(nlogn)$\\\\
+Now Let's examine the Generic running time of Divide and Conquer Algorithims.\\
+
+$T(n) = a\times T(n/b) + c \times n ^ d$\\
+$a \times T(n/b)$ is the time for solving a subproblem\\
+$c \times n ^ d$ is the time for splitting and combining\\
+
+\subsection{The Theorem}
+Let $T(n)$ be above recurrence
+\begin{enumerate}
+    \item if $a < b ^ d$ then $T(n) = \Theta(n^d)$
+    \subitem When a is small the dominant time of the algorithm is spent on the divide and combination.
+    \item if $a = b ^ d$ then $T(n) = \Theta(n^dlogn)$
+    \subitem The time is evenly split between dividing and conquering.
+    \item if $a > b ^ d$ then $T(n) = \Theta(n^{log_ba})$ 
+    \subitem You can rewrite the $\Theta$ term a $a^{log_bn}$, this tells us that the recursion is the major portion of the algorithm
+\end{enumerate}
+
+$T(n) = \sum_{i=0}^{log_bn}a^ic(n/b^i)^d = cn^d\sum_{i=0}^{log_bn}(a/b^d)^i$\\
+Recall that $1+x+x^2+...+x^k = \frac{x^{k+1} - 1}{x-1}$ (if x$\ne 1$)\\
+If $0 <= x < 1$ then $1+x+x^2... = \frac{1}{1-x}$\\
+
+Therefore\\
+Case 1: $a<b^d \to \frac{a}{b^d} < 1$\\
+$G(n) <= \sum_{i=0}^{\infty}(\frac{a}{b^d})^i = \frac{1}{1-\frac{a}{b^d}} =$ constant\\
+$T(n) = c \times n ^ d \Theta(1) = \Theta(n^d)$\\
+
+Case 2: $a=b^d \to \frac{a}{b^d} = 1$\\
+$G(n) = \sum_{i=0}^{log_bn}1 = (1 + log_bn)$\\
+$T(n) = c \times n ^ d \Theta(logn) = \Theta(n^dlogn)$\\
+
+Case 3: $a > b^d \to \frac{a}{b^d} > 1$\\
+$G(n) = \sum_{i=0}^{log_bn}(\frac{a}{b^d})^i = \frac{(\frac{a}{b^d})^{log_bn+1} - 1}{a/b^d - 1}$\\
+$= \Theta((\frac{a}{b^d})^{log_bn})$
+$= \Theta(\frac{a^{log_bn}}{(b^d)^{log_bn}})$
+$= \Theta(\frac{n^{log_ba}}{n^d})$\\
+
+$a^{log_bn} = n^{log_ba}$ [law of logs]\\
+$b^{d\times log_bn} = (b^{log_bn})^d = n^d$\\
+$T(n) = c \dot n^d\Theta(\frac{n^{log_ba}}{n^d}) = \Theta(n^{log_ba})$
+
+\section{Karatsuba's multiplication algorithm}
+KT Chapter 5.5
+
+Adding binary numbers of size n takes $\Theta(n)$ time\\
+Multiplying binary numbers of size n takes $\Theta(n^2)$ time\\
+
+\subsection{Divide And Conquer no1}
+X = $[X_1][X_0]$\\
+Y = $[Y_1][Y_0]$\\
+$X = X_1 \times 2^{\frac{n}{2}} + X_0$\\
+$Y = Y_1 \times 2^{\frac{n}{2}} + Y_0$\\
+$X \times Y = X_1Y_12^n + X_1X_02^{n/2} + X_0Y_12^{n/2}+X_0Y_0$\\
+One multiplication of 2 n-bit numbers needs 4 multiplications of 2 n/2 bit numbers + 3 additions + 1 shift by n bits + 2 shifts by n/2 bits. Therefore we would get the following:\\
+$T(n) = 4\times T(\frac{n}{2}) + c \times n$\\
+a = 4, b = 2, d = 1, using the Master Theorem we know that since $a > b^d$\\
+$T(n) = \Theta(n^{log_24}) = \Theta(n^2)$
+
+\subsection{Divide and Conquer no2}
+$X \times Y = X_1Y_1 \times 2^n + ((X_1+X_0)(Y_1+Y_0)-X_1Y_1-X_0Y_0)\times 2^{n/2} + X_0Y_0$\\
+$T(n) = 3 \times T(\frac{n}{2}) + c \times n$
+a = 3, b = 2, d = 2, using the Master Theorem we know that since $a < b^d$ Therefore we get the following:\\
+$T(n) = \Theta(n^{log_23}) = \Theta(n^{1.585...})$
+
+\subsection{Multiplication}
+MULT(X, Y)\\
+$n := max(size(x), size(y))$\\
+if n = 1 then return $X \times Y$,\\
+add n - size(X) 0's to the left of X\\
+and n - size(Y) 0's to the left of Y\\
+$X_1 = $ left most $\ceil{\frac{n}{2}}$ bits of $X; X_0:=$ rightmost $\frac{n}{2}$ bits of X
+$Y_1 = $ left most $\ceil{\frac{n}{2}}$ bits of $Y; Y_0:=$ rightmost $\frac{n}{2}$ bits of Y
+
+\subsection{TIFF CELEBRITY PROBLEM}
+During Tiff you go to a fancy yorkville bar, and there's n patrons in the bar. and exactly one of them is a celebrity. So what's the definition of a celebrity, 
+\begin{enumerate}
+    \item a celebrity is that everyone except you know the celebrity.
+    \item a celebrity knows nobody except themself at the bar
+\end{enumerate}
+
+So being curious person you want to know who the celebrity is, so you go to each person and ask whether the know someone else. And they can only answer yes or no. Sounds like we have to ask n^2 questions.
+
+$Q(n) = Q(\frac{n}{2}) + \frac{1}{2}n$
+a = 1, b = 2, d = 1, since  $a < b^d$ then $Q(n) = \Theta(n)$
+
+\end{document}
+
