@@ -20,27 +20,44 @@ See Email
 \begin{enumerate}[A]
 \item
     \begin{enumerate}[i]
-        \item test
-        \item test
+		\item Eve will not know enough information to decipher any future
+			messages between Alice and Bob
+        \item No this scheme is insecure against Mallory she would be able to
+			modify $g^a mod p$ or $g^b mod p$ with her own values. Alice and Bob
+			will still be able to send messages between each other but Mallory
+			would also be able to read them.
     \end{enumerate}
 \item
     \begin{enumerate}[i]
-        \item test
-        \item test
+        \item Yes this will be secure against Eve, even though she can see the
+			public keys this is not enough for her to decipher any of the
+			messages.
+        \item No Mallory could insert her own public key instead of either or
+			both Alice and Bob's keys. In this case her own private key would be
+			able to decipher any future messages.
     \end{enumerate}
 \item
     \begin{enumerate}[i]
-        \item test
-        \item test
+        \item Yes, there's absolutely nothing Eve can do to read the messages
+			between Alice and Bob.
+        \item Yes, Even if Mallory knew their public keys she wouldn't be able
+			to read the messages or create her own.
     \end{enumerate}
 \item
     \begin{enumerate}[i]
-        \item test
-        \item test
-        \item test
+        \item Yes, there's absolutely nothing Eve can do to read the messages
+			between Alice and Bob.
+        \item Yes, Mallory would not be able to do anything to the messages
+			betwwen Alice and Bob.
+        \item Yes, In the very unlikely case that Mallory can brute force either
+			of their private keys in the previous case she would be able to
+			modify messages between Alice and Bob. But in this case she would
+			have less than a day to brute force the key and she would only be
+			able to modify messages for one day.
     \end{enumerate}
 \end{enumerate}
 \section{Don't be Evil}
+See Mathlab submission
 \section{Exploiting Weak RSA Keys to Decrypt HTTPS Packets}
 \section{SSL Stripping}
 \section{ARP-Cache Poisoning}
