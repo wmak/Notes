@@ -68,6 +68,18 @@ Primes:\\
 \end{verbatim}
 \lstinputlisting{hax.html}
 \section{SSL Stripping}
+\begin{enumerate}[A]
+	\item SSLstrip relies on severla use cases. First it assumes that a user will
+		not type out the full "https://" in their browser since it needs to
+		pretend to be a HTTPS session while being HTTP. Secondly it requires
+		there to be traffic from non-ssl pages to secure ssl pages. 
+	\item The best way to thrwart someone using SSLStrip is to ensure their site
+		has SSL enabled on every page.
+	\item A site like facebook's best way to protect against this is to make it
+		extremely clear when switching to and from SSL so the user has no
+		confusion as to which is which. As well as informing the user of the
+		risks if this happens.
+	\item %TODO(william)%
 \section{ARP-Cache Poisoning}
 \begin{enumerate}[A]
 	\item A simplistic ARP attack would be to send an ARP reply to a victim
