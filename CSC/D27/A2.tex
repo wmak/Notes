@@ -61,6 +61,42 @@ See Mathlab submission
 \section{Exploiting Weak RSA Keys to Decrypt HTTPS Packets}
 \section{SSL Stripping}
 \section{ARP-Cache Poisoning}
+\begin{enumerate}[A]
+	\item A simplistic ARP attack would be to send an ARP reply to a victim
+		telling them the false location to something system critical, for
+		example the router. This would cause the victims system to be unable to
+		access that resource. This would only work if the victim's system is
+		accepting unsolicited replies.
+	\item If Mallory wanted to perform a Man in the Middle attack on Alice and
+		Bob she would start by sending a "reply" to Bob stating that her
+		computer's MAC address was Alice's $a$, now Bob will think that
+		Mallory's IP address $M$ is Alices $A$. Next Mallory sends a "reply" to
+		Alice stating that her MAC address was Bob's $b$, now Bob will think
+		Mallory's IP address $M$ is Bob's $B$. Now finally whenever
+		Alice sends a packet to Bob her packet will be received by Mallory
+		instead who can do whatever she likes. And the forwards it along to Bob.
+		and vice versa for any traffic coming from Bob.
+	\item The easiest solution would be to use static IP tables this means that
+		there is no confusion as to which IP address is who on the network. This
+		would address any issues with preexisting computers on the network. But
+		this would still be problematic if when a new computer joins the network
+		there is already a Man in the Middle.
+	\item This tool would only slow an attacker down, in both scenarios
+		described in previous questions they only have at most 3 different IP
+		addresses and MAC addresses. Which means they would be only able to
+		launch this attack against one or two devices in the network, every 30
+		seconds. Which with a patient attacker isn't that big a deal.
+\end{enumerate}
 \section{TCP SYN-Cookies }
+\begin{enumerate}[A]
+	\item Yes, if the attacker responds with an invalid {\bf ACK} code. As well
+		the attacker can spoof their IP address in the SYN which means that the
+		server will send their requests to a falsified IP address and then
+		waste resources on these invalid cookies.
+	\item No, probably not since most of the IP addresses in the SYN will be
+		valid the server will have no trouble getting a response from them. But
+		in the case that the attacker has enough bandwidth to overpower the
+		server it would still go down from the overwhelming number of requests.
+\end{enumerate}
 
 \end{document}
