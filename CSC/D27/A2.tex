@@ -67,6 +67,14 @@ $q = 8194124624414046878093826113$
 
 \newpage
 \lstinputlisting{hax.html}
+\subsection{Method used to determine primes}
+To determine the prime factors of the modulus we used a piece of software called
+yafu(http://yafu.sourceforge.net/). Examining the source it uses a wide variety 
+of algorithms in a very
+complicated manner. These include "Shanks Square forms factorizations",
+"Fermat's Factorization method", and "Pollard Rho Factorization method". Using
+these methods Yafu was able to compute both factors in a very reasonable amount
+of time.
 \section{SSL Stripping}
 \begin{enumerate}[A]
 	\item SSLstrip relies on severla use cases. First it assumes that a user will
