@@ -87,7 +87,14 @@ of time.
 		extremely clear when switching to and from SSL so the user has no
 		confusion as to which is which. As well as informing the user of the
 		risks if this happens.
-	\item hi %TODO(william)%
+	\item Yes since HSTS forces web browsers to use HTTPS and never with HTTP
+    \item Snippet:\\
+\begin{verbatim}
+    2014-11-09 00:34:44,612 Sending header: content-type : application/x-www-form-urlencoded
+    2014-11-09 00:34:44,612 POST Data (www.facebook.com): lsd=AVq2omPV&email=email%
+    40hotmail.ca&pass=supersecurepassword&default_persistent=0&timezone=&lgnrnd=21332
+    _-VDl&lgnjs=n&locale=en_US
+\end{verbatim}
 \end{enumerate}
 \section{ARP-Cache Poisoning}
 \begin{enumerate}[A]
@@ -118,10 +125,9 @@ of time.
 \end{enumerate}
 \section{TCP SYN-Cookies }
 \begin{enumerate}[A]
-	\item Yes, if the attacker responds with an invalid {\bf ACK} code. As well
-		the attacker can spoof their IP address in the SYN which means that the
-		server will send their requests to a falsified IP address and then
-		waste resources on these invalid cookies.
+    \item No, SYN-Cookies are designed specifically to defend against a SYN
+        Flood. It does this by adding a initial sequence number. which the
+        client then increments by packet size.
 	\item No, probably not since most of the IP addresses in the SYN will be
 		valid the server will have no trouble getting a response from them. But
 		in the case that the attacker has enough bandwidth to overpower the
