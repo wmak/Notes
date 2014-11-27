@@ -17,121 +17,33 @@
 
 \section{Course Feedback}
 See Email
-\section{Key-Handling Vulnerabilities with Public-Key Systems}
-\begin{enumerate}[A]
-\item
-    \begin{enumerate}[i]
-		\item Eve will not know enough information to decipher any future
-			messages between Alice and Bob
-        \item No this scheme is insecure against Mallory she would be able to
-			modify $g^a mod p$ or $g^b mod p$ with her own values. Alice and Bob
-			will still be able to send messages between each other but Mallory
-			would also be able to read them.
-    \end{enumerate}
-\item
-    \begin{enumerate}[i]
-        \item Yes this will be secure against Eve, even though she can see the
-			public keys this is not enough for her to decipher any of the
-			messages.
-        \item No Mallory could insert her own public key instead of either or
-			both Alice and Bob's keys. In this case her own private key would be
-			able to decipher any future messages.
-    \end{enumerate}
-\item
-    \begin{enumerate}[i]
-        \item Yes, there's absolutely nothing Eve can do to read the messages
-			between Alice and Bob.
-        \item Yes, Even if Mallory knew their public keys she wouldn't be able
-			to read the messages or create her own.
-    \end{enumerate}
-\item
-    \begin{enumerate}[i]
-        \item Yes, there's absolutely nothing Eve can do to read the messages
-			between Alice and Bob.
-        \item Yes, Mallory would not be able to do anything to the messages
-			betwwen Alice and Bob.
-        \item Yes, In the very unlikely case that Mallory can brute force either
-			of their private keys in the previous case she would be able to
-			modify messages between Alice and Bob. But in this case she would
-			have less than a day to brute force the key and she would only be
-			able to modify messages for one day.
-    \end{enumerate}
-\end{enumerate}
-\section{Don't be Evil}
-See Mathlab submission
-\section{Exploiting Weak RSA Keys to Decrypt HTTPS Packets}
-Primes:\\
-$p =
-15543364719846102734035905265021007874527909072857707530407929290687101099950235380124854710034333308285660\\202980757696503925683873746491877865507719899027251207102262278680571817169261263452242836721127096300509656928\\177929591710741117876178047883330343700515792044255540432173197$\\
-$q = 8194124624414046878093826113$
 
-\newpage
-\lstinputlisting{hax.html}
-\subsection{Method used to determine primes}
-To determine the prime factors of the modulus we used a piece of software called
-yafu(http://yafu.sourceforge.net/). Examining the source it uses a wide variety 
-of algorithms in a very
-complicated manner. These include "Shanks Square forms factorizations",
-"Fermat's Factorization method", and "Pollard Rho Factorization method". Using
-these methods Yafu was able to compute both factors in a very reasonable amount
-of time.
-\section{SSL Stripping}
+\section{So, You Want to be a Hacker?}
 \begin{enumerate}[A]
-	\item SSLstrip relies on severla use cases. First it assumes that a user will
-		not type out the full "https://" in their browser since it needs to
-		pretend to be a HTTPS session while being HTTP. Secondly it requires
-		there to be traffic from non-ssl pages to secure ssl pages. 
-	\item The best way to thrwart someone using SSLStrip is to ensure their site
-		has SSL enabled on every page.
-	\item A site like facebook's best way to protect against this is to make it
-		extremely clear when switching to and from SSL so the user has no
-		confusion as to which is which. As well as informing the user of the
-		risks if this happens.
-	\item Yes since HSTS forces web browsers to use HTTPS and never with HTTP
-    \item Snippet:\\
-\begin{verbatim}
-    2014-11-09 00:34:44,612 Sending header: content-type : application/x-www-form-urlencoded
-    2014-11-09 00:34:44,612 POST Data (www.facebook.com): lsd=AVq2omPV&email=email%
-    40hotmail.ca&pass=supersecurepassword&default_persistent=0&timezone=&lgnrnd=21332
-    _-VDl&lgnjs=n&locale=en_US
-\end{verbatim}
+	\item
+		If the marker had not turned off the default stack-protector and the the
+		user enters a string over certain length then they would observe an
+		error stating:
+		\begin{verbatim}
+		*** stack smashing detected ***: ./marker terminated
+		======= Backtrace: =========
+		\end{verbatim}\\
+		etc...
+	\item
+		The string values I used were:
+		\begin{verbatim}
+		Name: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiz
+		Mark: hi
+		Rubric: hellooooooooo
+		\end{verbatim}\\
+		The important part of the Name variable are the last two characters.
+		This is because the first 60 characters cause an overflow to occur. An
+		overflow occurs because the way auth and name are stored causes auth to 
+		be 60 bytes away so we can just set it to 'iz'
+	\item
+		No. In this particular case it would have been protected. Because the
+		user would write in the opposite direction from auth. But if 
+		'char name[34]` came before `int auth=0` then it would still be 
+		possible.
 \end{enumerate}
-\section{ARP-Cache Poisoning}
-\begin{enumerate}[A]
-	\item A simplistic ARP attack would be to send an ARP reply to a victim
-		telling them the false location to something system critical, for
-		example the router. This would cause the victims system to be unable to
-		access that resource. This would only work if the victim's system is
-		accepting unsolicited replies.
-	\item If Mallory wanted to perform a Man in the Middle attack on Alice and
-		Bob she would start by sending a "reply" to Bob stating that her
-		computer's MAC address was Alice's $a$, now Bob will think that
-		Mallory's IP address $M$ is Alices $A$. Next Mallory sends a "reply" to
-		Alice stating that her MAC address was Bob's $b$, now Bob will think
-		Mallory's IP address $M$ is Bob's $B$. Now finally whenever
-		Alice sends a packet to Bob her packet will be received by Mallory
-		instead who can do whatever she likes. And the forwards it along to Bob.
-		and vice versa for any traffic coming from Bob.
-	\item The easiest solution would be to use static IP tables this means that
-		there is no confusion as to which IP address is who on the network. This
-		would address any issues with preexisting computers on the network. But
-		this would still be problematic if when a new computer joins the network
-		there is already a Man in the Middle.
-	\item This tool would only slow an attacker down, in both scenarios
-		described in previous questions they only have at most 3 different IP
-		addresses and MAC addresses. Which means they would be only able to
-		launch this attack against one or two devices in the network, every 30
-		seconds. Which with a patient attacker isn't that big a deal.
-\end{enumerate}
-\section{TCP SYN-Cookies }
-\begin{enumerate}[A]
-    \item No, SYN-Cookies are designed specifically to defend against a SYN
-        Flood. It does this by adding a initial sequence number. which the
-        client then increments by packet size.
-	\item No, probably not since most of the IP addresses in the SYN will be
-		valid the server will have no trouble getting a response from them. But
-		in the case that the attacker has enough bandwidth to overpower the
-		server it would still go down from the overwhelming number of requests.
-\end{enumerate}
-
 \end{document}
