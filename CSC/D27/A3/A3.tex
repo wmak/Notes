@@ -37,7 +37,7 @@ See Email
 		Rubric: hellooooooooo
 		\end{verbatim}\\
 		The important part of the Name variable are the last two characters.
-		This is because the first 60 characters cause an overflow to occur. An
+		This is because the $34^{th}$ character causes an overflow to occur. An
 		overflow occurs because the way auth and name are stored causes auth to 
 		be 60 bytes away so we can just set it to 'iz'
 	\item
@@ -46,4 +46,11 @@ See Email
 		'char name[34]` came before `int auth=0` then it would still be 
 		possible.
 \end{enumerate}
+
+\section{Abuse of Set-UID File Permissions}
+Given 60 seconds of access to another student's unattended keyboard I would go
+into their "\$HOME/.ssh/authorized\_keys" file and add my own ssh key. This way
+later on I would be able to ssh into their computer without needing their
+password.
+
 \end{document}
