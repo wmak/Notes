@@ -57,8 +57,7 @@ See attached files for answers to A, D, E
 		possible Canadian addresses if I knew about this vulnerability with
 		Bell. Or if the screenshot is from his router then I would know that I
 		can go on 76.65.189.43. 
-		Then I would use netcat to figure out which ports are open and see
-		which of them allow me to login with the authenticate
+		I would then use netcat to send the following request.
 		request(http://192.168.2.1/login?u=admin&p=admin). The ones that do I
 		would then send a new DNS server. With my new DNS server I would have
 		the google ip redirect to my kim.dot.com.
@@ -74,4 +73,28 @@ See attached files for answers to A, D, E
 		then aftewards modify the DNS server yet again to set google to be
 		kim.dot.com
 \end{enumerate}
+
+\section{Denial of Service}
+\begin{enumerate}[A]
+	\item
+		For this attack I would send a TCP packet into the network-connection
+		with the reset flag set to one. This way the other computer will think
+		that the connection is no longer working.
+	\item 
+		It's well known that TCP does not have a builtin defense against
+		spoofing of TCP resets(RST). For example in 2007 after Comcast decided
+		to do this attack on their users a RFC was released detailing the
+		failings of rfc \url{https://tools.ietf.org/html/rfc4953}
+	\item
+		Yes provided that they can monitor the network and determine things such
+		as the sequence number. And that they can spoof their IP. If they cannot
+		do either one of these things then it would not be possible for them to
+		conduct a similar account
+	\item
+		No Subscribers will not be able to protect themselves even if they use
+		SSL encrypted packets. This is because the attackers can target either
+		client or server.
+		% http://arxiv.org/pdf/1208.2357.pdf
+\end{enumerate}
+
 \end{document}
