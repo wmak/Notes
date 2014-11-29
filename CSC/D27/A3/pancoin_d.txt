@@ -1,0 +1,14 @@
+' OR 1=1); --
+$sql = "SELECT * FROM Person WHERE Username = ' ' OR 1=1); -- ' ";
+
+function _checkLogin($username, $password) {
+    if (ctype_alnum($username)){
+        $sql = "SELECT Salt FROM Person WHERE Username = '$username'";
+        $rs = $this->db->executeQuery($sql);
+    } else {
+        return false;
+    }
+    .
+    .
+    .
+    
