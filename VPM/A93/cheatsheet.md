@@ -1,4 +1,4 @@
-## Music and Motion
+# Music and Motion
 * Music Stablishes a relationship, a counterpoint between the passing of
   time, music's duration, and the material and technical means through which
   music is made manifest
@@ -174,3 +174,26 @@ phrase or section
 	* Amateur vs Professional
 	* Venue and Setting
 	* Production Value and Performance conditions
+
+## History and Place
+* Historically authentic vs not
+* Tradition
+	* Genre
+		* Type of Music
+		* Sacred vocal music, Chirstian church, mass
+		* Venue
+		* Greek text
+		* social impetus
+	* Style
+		* The combination of qualities that create distinctiveness
+		* Time (rhythm, meter)
+		* Space (melody, harmony, texture)
+		* Instrumentation
+	* Innovation
+* Historical Periods of music
+	* Medieval:		450-1450
+	* Renaissance:	1450-1600
+	* Baroque:		1600-1750
+	* Classical:	1750-1820
+	* Romanticism:	19th Century
+	* Modern:		20th Century
