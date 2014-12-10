@@ -112,7 +112,8 @@
 			* Varese, Ionisation
 		* Keyboards
 			* Identified by keyboard; sound production differs from striking
-			  strings (piano), to vibrating columns of air(Pipe oragn) to electronic(Synthesizer)
+			  strings (piano), to vibrating columns of air(Pipe oragn) to 
+			  electronic(Synthesizer)
 			* Bach, Tocccata
 			* Chopin, Waltz
 		* Britten Benjamin, Variations and fuge on a theme of henry Purcell
@@ -135,4 +136,32 @@
 			* Papageno (Baritone)
 			* Sarastro (Bass)
 			* Tamino (Lyric Tenor)
-
+* Perspectives
+	* Context
+		* Performer
+			* Visual
+				* Facial Expression
+				* Acting
+			* Tecnique
+				* Vibrato - The musical effect of a fluctuation of pitch on
+				  a single note.
+				* Tuning and accuracy
+				* Technical ability
+				* Suitability of voice/instrument for music
+				* Voice and tone quality
+			* Interpretation
+				* Ability to realize music
+					* Culture
+					* Style
+					* History
+				* Specific aspects
+					* Tempo
+					* Dynamics
+					* Line/phrasing
+					* articulation
+					* vocal/tone colour
+					* pronunciation of text
+		* Style and Genre
+		* Amateur vs Professional
+		* Venue and Setting
+		* Production Value and Performance conditions
