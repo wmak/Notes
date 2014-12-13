@@ -145,11 +145,11 @@
  2. easy/fast to compute hash
  3. produces a fixed length output
  4. given *hash* it's infeasible to find *original* message
-  - Pre-image resistance
+   - Pre-image resistance
  5. given *original* message it's infeasible to find *another* message with the
  same hash
-  - 2nd-pre-image resistance
+   - 2nd-pre-image resistance
  6. finding any two messages with the same hash is infeasible
-  - strong ocllision resistance
+   - strong ocllision resistance
 - Hashing is weak to the birthday attack
  - 
