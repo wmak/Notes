@@ -233,4 +233,32 @@
   - Interception of DNS
    - I can say my site is google now
 # HTTPS
-## SSL
+- Most widely used security protocol
+- Works at transport layer
+- Works for anything TCP based
+- Use a MAC with shared secret key
+- Use a symmetric encryption with a shared secret key
+- compressed then encrypted
+- Operations
+ - Fragment
+ - Compress
+ - Add MAC
+ - Encrypt
+ - Append SSL Header
+- 4 phases for handskae
+ 1. Hello
+   - Client tells server what it can do
+   - Server decides on options that work for both
+   - Random bytes to be used as session key
+ 2. Server sends certificates, key excahnge
+   - Clien uses certificate to verify server
+ 3. Client sends certificates, key exchange
+ 4. Change cipher suite and finish handshake
+- OVerhead
+ - 2-10 times slower than unsecure TCP
+ - handshake involves client encryption, server decryption
+ - Data transfer
+- Vulnerabilities
+ - Mixed content sites, http -> https
+ - SSL stripping
+  - When user switches from http to https attacker imposes MITM
