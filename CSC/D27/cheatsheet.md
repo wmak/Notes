@@ -139,7 +139,8 @@
     - a^{φ(n)} mod n = 1
     - given two primes p and q where n = p x q
     - φ(n)=(p-1)(q-1) 
-# Secure Hash Algorithms, MACs, Digital Signatures
+# Secure Hash Algorithms, Message Authentication, Digital Signatures
+## Hashing
 - Requirements for a secure hash function
  1. Works for abritrary length messages
  2. easy/fast to compute hash
@@ -152,4 +153,84 @@
  6. finding any two messages with the same hash is infeasible
    - strong ocllision resistance
 - Hashing is weak to the birthday attack
- - 
+- As we know MD5 is a pile of crap
+ - SHA-1
+  - 160 bit hashes
+ - SHA-2
+  - 224, 256, 384 or 512 bits
+## Message Authentication
+- protect the **integrity** of a message
+ - Implemented with encryption, MAC or secure hash function
+- validate the **identity** of the originator
+ - Implemented with encryption, MAC or digital signature
+- know the **origin** of the message
+ - Implemented with digital signature
+- MACs
+ - Message Authentication Codes
+ - Checksum
+ - Provides assurance that message is unaltered.
+ - Requirements (Let m = Message, M = MAC)
+  1. knowing m and M cannot find m' with the same M
+  2. M should be uniformly distributed.
+  3. M should depend equally on all bits of m
+ - AES-CBC is the standard MAC
+- Digital Signatures
+ - Properties
+  - Must use information unique to the sender
+  - Relatively easy to make
+  - Relatively easy to recognize and verify
+  - computationally infeasible to forge
+  - Signature associated with a message
+# Network Attacks
+- LAN translation from IP to link-layer addresses 
+ - ARP cache poisoning by violating protocol assumptions
+ - Address Resolution Protocol
+ - Maps IP to Mac Address
+ - There is no authentication
+ - ARP always trusts everyone
+- Network packets pass by/through untrusted hosts
+ - eavesdropping (packet sniffing)
+- IP addresses are public
+ - smurfattacks
+  - send ICMP requests pretending to come from target
+  - Every host on the network generates a seply to target
+ - Ping of Death
+  - Until '97 ICMP packets larger than 64K would cause a machine to crash
+- TCP connection requires state
+ - SYN flooding, port-scanning
+- TCP state is easy to guess
+ - TCP spoofing and connection hijacking
+- User Datagram Protocol(UDP)
+ - Connectionless transport layer protocol
+ - just send datagram to application process at specified IP
+ - DOS by UDP flood
+- Transmission Control Protocl(TCP)
+ - Divide datastream into packets
+ - each packet gets a sequence number
+ - Receiver reassemples packets and acknowledges receipt
+ - 3-Way Handshake
+  - Ask server for sync
+  - Server asks client for sync and acknowledgement
+  - client respons with acknowledgement
+ - LAND DoS Attack
+  - Single packet with source/port equal to destination
+  - Triggers infinite loop to itself.
+ - SYN-flooding DoS attack
+  - DDoS attack.
+  - Mitigating the attack
+   - SYN cookies 
+    - return a secure token to clien
+    - no server state is allocated until client completes the handshake
+   - Random Deletion
+    - If queue is full randomly delete an entry
+ - DoS connection reset
+  - if attacker can figure out someone elses sequence number
+  - send packet with reset flag
+- Domain Name System (DNS)
+ - Map symbolic names to IP addresses
+ - Vulnerabilities
+  - Users/hosts trust mapping provided by DNS
+  - Interception of DNS
+   - I can say my site is google now
+# HTTPS
+## SSL
