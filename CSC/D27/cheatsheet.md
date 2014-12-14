@@ -262,3 +262,111 @@
  - Mixed content sites, http -> https
  - SSL stripping
   - When user switches from http to https attacker imposes MITM
+# Authenticating Humans
+- How to determine you are who you say you are
+- Passwords are a poor candidate for this
+- Salt
+ - Append random string to the end of password before hashing
+ - Ensures attacker can't pre-compute hashes of passwords
+- Password Phishing
+ - Malicious website could try using your password on another site
+# Buffer Overflows
+- Required for attack
+ - no \0 character
+ - should not crash program before attack program exits
+- Details vary between CPU’s and OS’s:
+ - little vs big endian
+ - stack frame structure
+ - direction of stack growth
+- return-to-libc exploit
+ - set ret-addr to some libc function
+- Canary 
+ - Embed a random string into every stack frame
+ - Verify canary string is unchanged before moving on
+ - PointGuard
+  - protects function pointers and setjmp buffers by placing canaries with them
+  - affects performance
+- Libsafe
+ - Intercepts calls to common buffer overflow functions
+ - checks that there's sufficient space to copy over
+ - otherwise says no
+# SQL injection
+- Prevention
+ - black/white list
+ - Prepared Statements
+  - use static queries
+  - bind the variables
+ - Blacklisting doesn't work
+  - can miss some characters
+  - accidently prevent good input
+ - Prepared statements only works in certain situations
+  - SELECT, INSERT, UPDATE, DELETE
+  - Nto applicable if user does something that varies the table
+# Spam + Phishing
+- Email
+ - SMTP was designed for trusting world
+ - Received headers are inserted by relays
+  - don't trust any but the top one
+  - and only trust it's IP
+  - domain can be forged
+ - From header is completely untrustworthy
+- Spam
+ - incentives
+  - ads
+  - phishing
+  - scams
+  - Recruiting crooks
+  - recruiting bots
+  - Pump and dump (stocks
+ - prevention
+  - Spam blacklists
+   - blocks servers or ISPs that generate lots of spam
+ - Thin-thick pipe method
+  - Have a high speed connection and low speed zombies
+  - low speed zombies get blocked but high speed connection remains okay
+ - Graylists
+  - keep triples of sender, recipient, peer ip
+  - if triple not in DB reply busy
+  - second time allow email to pass
+  - works well?
+ - Whitelisting
+  - fill in captcha to email me
+- Phishing
+ - image authentication
+  - use image as second factor 
+  - show image decided by user, if not what htey wanted
+  - they'll know it's phishing
+# Web Security
+- HTTP is stateless.
+- bad ideas to get around this
+ - Encoding state in url
+  - Easy to eavesdrop
+  - URL is not private at all
+  - Unstable
+ - Form based session state
+  - ... easily modified
+   - people actually used this?!
+  - don't point hidden variable to file and then display it's content
+   - change it to password file
+   - GG
+- C IS FOR COOKIE
+ - used for:
+  - Authentication
+  - Personalization
+  - Transaction processing
+  - tracking
+ - add a MAC to every cookie so user can't edit them
+- Same-Origin policy
+ - Only the site that read/modifed information it creates
+ - does not apply to scripts themselves
+ - scripts can modify other scripts on the same page
+- Top 3 Web app vulnerabilities
+ - SQL injection
+ - CSRF
+  - Take cookies from other scripts
+  - Web apps should refreshe *nonce* in every *form* and check in every *request*
+  - cookie auth is not enough
+   - Secret Validation tokens
+   - Referer Validation
+   - Custom HTTP header
+ - XSS
