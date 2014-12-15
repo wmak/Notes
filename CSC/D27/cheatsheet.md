@@ -382,3 +382,28 @@
    - Major issue, failure to sanitize untrusted input
   - Persistent (stored XSS)
    - Relies on users downloading malicious scripts
+# Malware
+- Three ideas
+- Trojan
+ - **Undesired Functionality
+ - Hidden in code**
+ - Trick users into running your code
+ - Do not self replicate
+- Worm
+ - **Undesired Functionality
+ - Propagates**
+ - Self contained
+- Virus
+ - **Undesired Functionality
+ - Propagates
+ - Hidden in code**
+ - Inserts itself into a host program
+- AntiVirus
+ - Signature based
+ - look for bit patterns
+ - To combat this bad people encrypt the code
+  - To combat that use decryptor as signature
+ - Polymorphic virus, mutate the decryptor code
+  - sandbox
+  - Wait for virus to decrypt
+  - Bam you got it.
