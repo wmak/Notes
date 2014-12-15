@@ -51,6 +51,7 @@
     - Add Round Key
     - XOR state with key material
   - all arithmetic done in GF(2^8)
+
 # Block Mode
 - ECB (Electronic Code Book)
   - Break text into blocks
@@ -97,6 +98,7 @@
     - Allows for out of order encryption/decryption
   - Cons
     - Never reuse keys.
+
 # Stream Cipher
 - RC4
   - Fast and simple implementation
@@ -107,6 +109,7 @@
     - Shuffle the state array using Key
   - Encryption
     - XOR state value with next byte to encrypt
+
 # Public Key Cryptography
 - Each user has 2 keys
   - Secret key
@@ -139,7 +142,9 @@
     - a^{φ(n)} mod n = 1
     - given two primes p and q where n = p x q
     - φ(n)=(p-1)(q-1) 
+
 # Secure Hash Algorithms, Message Authentication, Digital Signatures
+
 ## Hashing
 - Requirements for a secure hash function
  1. Works for abritrary length messages
@@ -158,6 +163,7 @@
   - 160 bit hashes
  - SHA-2
   - 224, 256, 384 or 512 bits
+
 ## Message Authentication
 - protect the **integrity** of a message
  - Implemented with encryption, MAC or secure hash function
@@ -181,6 +187,7 @@
   - Relatively easy to recognize and verify
   - computationally infeasible to forge
   - Signature associated with a message
+
 # Network Attacks
 - LAN translation from IP to link-layer addresses 
  - ARP cache poisoning by violating protocol assumptions
@@ -232,6 +239,7 @@
   - Users/hosts trust mapping provided by DNS
   - Interception of DNS
    - I can say my site is google now
+
 # HTTPS
 - Most widely used security protocol
 - Works at transport layer
@@ -246,14 +254,14 @@
  - Encrypt
  - Append SSL Header
 - 4 phases for handskae
- 1. Hello
-   - Client tells server what it can do
-   - Server decides on options that work for both
-   - Random bytes to be used as session key
- 2. Server sends certificates, key excahnge
-   - Clien uses certificate to verify server
- 3. Client sends certificates, key exchange
- 4. Change cipher suite and finish handshake
+  1. Hello
+    - Client tells server what it can do
+    - Server decides on options that work for both
+    - Random bytes to be used as session key
+  2. Server sends certificates, key excahnge
+    - Clien uses certificate to verify server
+  3. Client sends certificates, key exchange
+  4. Change cipher suite and finish handshake
 - OVerhead
  - 2-10 times slower than unsecure TCP
  - handshake involves client encryption, server decryption
@@ -262,6 +270,7 @@
  - Mixed content sites, http -> https
  - SSL stripping
   - When user switches from http to https attacker imposes MITM
+
 # Authenticating Humans
 - How to determine you are who you say you are
 - Passwords are a poor candidate for this
@@ -270,6 +279,7 @@
  - Ensures attacker can't pre-compute hashes of passwords
 - Password Phishing
  - Malicious website could try using your password on another site
+
 # Buffer Overflows
 - Required for attack
  - no \0 character
@@ -290,6 +300,7 @@
  - Intercepts calls to common buffer overflow functions
  - checks that there's sufficient space to copy over
  - otherwise says no
+
 # SQL injection
 - Prevention
  - black/white list
@@ -302,6 +313,7 @@
  - Prepared statements only works in certain situations
   - SELECT, INSERT, UPDATE, DELETE
   - Nto applicable if user does something that varies the table
+
 # Spam + Phishing
 - Email
  - SMTP was designed for trusting world
@@ -336,6 +348,7 @@
   - use image as second factor 
   - show image decided by user, if not what htey wanted
   - they'll know it's phishing
+
 # Web Security
 - HTTP is stateless.
 - bad ideas to get around this
@@ -382,6 +395,7 @@
    - Major issue, failure to sanitize untrusted input
   - Persistent (stored XSS)
    - Relies on users downloading malicious scripts
+
 # Malware
 - Three ideas
 - Trojan
