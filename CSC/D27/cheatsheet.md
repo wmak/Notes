@@ -1,56 +1,56 @@
 # Symmetric Crytography
 - Shift Ciphers
-  - Replace each letter with the letter x letters down.
+	- Replace each letter with the letter x letters down.
 - Monoalphabetic cipher
-  - Single substitution alphabet
-  - 4x10^26 keys
-  - Frequency Analysis
-    - Satistical Cryptanalysis in general
+	- Single substitution alphabet
+		- 4x10^26 keys
+	- Frequency Analysis
+		- Statistical Cryptanalysis in general
 - Vingenère Cipher
-  - Use a keyword
-  - Repeat the keyword and use that as shift
-  - Obscures against frequency analysis
+	- Use a keyword
+	- Repeat the keyword and use that as shift
+	- Obscures against frequency analysis
 - OTP
-  - Theoretically unbreakable
+	- Theoretically unbreakable
 - Playfair Block Cipher
-  - Create a 5x5 matrix of letters
-  - I == J
+	- Create a 5x5 matrix of letters
+	- I == J
 - Feistel Cipher
-  - do n rounds, on L and R halves of input
-  - Encrypt one half, and use that to encrypt other half
-  - Repeat.
+	- do n rounds, on L and R halves of input
+	- Encrypt one half, and use that to encrypt other half
+	- Repeat.
 - DES
-  - Type of Feistel cipher
-  - 16 rounds
-  - 56 bit keys
-  - 64 bit blocks
+	- Type of Feistel cipher
+	- 16 rounds
+	- 56 bit keys
+	- 64 bit blocks
 - 2DES
-  - Use 2 56 bit keys (112 bits)
-  - Increases key space to 112 bit keys
-  - Meet-In-The-Middle Attack
-    - C = E(K2, E(K1, P))
-    - P = D(K1, D(K2, C))
-    - E(K1, P) = X = D(K2, C)
+	- Use 2 56 bit keys (112 bits)
+	- Increases key space to 112 bit keys
+	- Meet-In-The-Middle Attack
+		- C = E(K2, E(K1, P))
+		- P = D(K1, D(K2, C))
+		- E(K1, P) = X = D(K2, C)
 - 3DES
-  - Use 2 Keys
-    - C = E(K1, D(K2, E(K1,P)))
-    - EDE provides DES compatibility, set K1 = K2.
-  - 168 bit key
-  - Slow implementations (DES was old)
+	- Use 2 Keys
+		- C = E(K1, D(K2, E(K1,P)))
+		- EDE provides DES compatibility, set K1 = K2.
+	- 168 bit key
+	- Slow implementations (DES was old)
 - AES
-  - 128/192/256 bit keys
-  - 128 bit block
-  - 4 steps, each reversible:
-    - Byte Substitution
-    - one S-box used on every byte
-    - Shift Rows
-    - permute bytes between columns
-    - A circular left byte-shift
-    - Mix Columns
-    - permutation using matrix multiply
-    - Add Round Key
-    - XOR state with key material
-  - all arithmetic done in GF(2^8)
+	- 128/192/256 bit keys
+	- 128 bit block
+	- 4 steps, each reversible:
+		- Byte Substitution
+			- one S-box used on every byte
+		- Shift Rows
+			- permute bytes between columns
+			- A circular left byte-shift
+		- Mix Columns
+			- permutation using matrix multiply
+		- Add Round Key
+			- XOR state with key material
+	- all arithmetic done in GF(2^8)
 
 # Block Mode
 - ECB (Electronic Code Book)
