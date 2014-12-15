@@ -399,18 +399,18 @@
 # Malware
 - Three ideas
 - Trojan
-	- **Undesired Functionality
-	- Hidden in code**
+	- **Undesired Functionality**
+	- **Hidden in code**
 	- Trick users into running your code
 	- Do not self replicate
 - Worm
-	- **Undesired Functionality
-	- Propagates**
+	- **Undesired Functionality**
+	- **Propagates**
 	- Self contained
 - Virus
-	- **Undesired Functionality
-	- Propagates
-	- Hidden in code**
+	- **Undesired Functionality**
+	- **Propagates**
+	- **Hidden in code**
 	- Inserts itself into a host program
 - AntiVirus
 	- Signature based
