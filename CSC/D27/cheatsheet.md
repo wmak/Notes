@@ -370,3 +370,15 @@
    - Referer Validation
    - Custom HTTP header
  - XSS
+  - even with Same-Origin Policy sometimes web applications embed user input
+  - Reflection Attack
+   - Code in web page executes arbitrary operations
+   - Steps:
+    1. User visits website
+    2. Receives a malicious link
+    3. Click on valid link
+    4. echo users input
+    5. This causes them to send valuable data to the bad server
+   - Major issue, failure to sanitize untrusted input
+  - Persistent (stored XSS)
+   - Relies on users downloading malicious scripts
