@@ -192,8 +192,48 @@ phrase or section
 	* Innovation
 * Historical Periods of music
 	* Medieval:		450-1450
+		* Plainchant; Machaut
 	* Renaissance:	1450-1600
+		* Josquin, Palestrina
 	* Baroque:		1600-1750
+		* Bach, Handel, Pachelbel
 	* Classical:	1750-1820
+		* Mozart
 	* Romanticism:	19th Century
+		* Chopin, Rossini, Schubert
 	* Modern:		20th Century
+		* Barber, Berlin, Britten, Cage, Carter, Copland, Crumb, Gershwin, Orff,
+		  Ravel, Robertson, Stravinsky, Varese, Williams
+* Technical/Acoustical considerations
+	* location
+		* Indoors
+		* Outdoors
+		* Church
+		* Recital Hall
+	* Appropriateness
+		* sacred
+		* secular
+	* Region
+		* e.g. Russian Natioinalism 
+* Aesthetic
+	* Differences experienced across culture and time
+		* Western vs non western
+		* Classical vs Romantic
+
+## Multimedia
+* Absolute music
+	* Instrumental music contrasdistinction to programme music
+	* Program music
+		* Music that expresses an extra musical idea.
+			* mood, narrative, pictorial image
+		* in contrast with absolute music
+			* Attempts to depict objects and events
+		* Night on the Bare Mountain
+			* Suterranean sounds of unearthy voices. Appearance of the Spirit of
+			  Darkness...
+	* Combining different media
+	* Music can create a world within very little time
+	* Can define the quality of characters action events
+	* Music can be used to help develop story quickly
+		* little development of character
+		* no over riding concern that music makes sense
