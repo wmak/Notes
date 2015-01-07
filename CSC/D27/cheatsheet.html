@@ -1,0 +1,581 @@
+<h1>Symmetric Crytography</h1>
+
+<ul>
+<li>Shift Ciphers
+<ul>
+<li>Replace each letter with the letter x letters down.</li>
+</ul></li>
+<li>Monoalphabetic cipher
+<ul>
+<li>Single substitution alphabet</li>
+<li>4x10^26 keys</li>
+<li>Frequency Analysis</li>
+<li>Satistical Cryptanalysis in general</li>
+</ul></li>
+<li>Vingenère Cipher
+<ul>
+<li>Use a keyword</li>
+<li>Repeat the keyword and use that as shift</li>
+<li>Obscures against frequency analysis</li>
+</ul></li>
+<li>OTP
+<ul>
+<li>Theoretically unbreakable</li>
+</ul></li>
+<li>Playfair Block Cipher
+<ul>
+<li>Create a 5x5 matrix of letters</li>
+<li>I == J</li>
+</ul></li>
+<li>Feistel Cipher
+<ul>
+<li>do n rounds, on L and R halves of input</li>
+<li>Encrypt one half, and use that to encrypt other half</li>
+<li>Repeat.</li>
+</ul></li>
+<li>DES
+<ul>
+<li>Type of Feistel cipher</li>
+<li>16 rounds</li>
+<li>56 bit keys</li>
+<li>64 bit blocks</li>
+</ul></li>
+<li>2DES
+<ul>
+<li>Use 2 56 bit keys (112 bits)</li>
+<li>Increases key space to 112 bit keys</li>
+<li>Meet-In-The-Middle Attack</li>
+<li>C = E(K2, E(K1, P))</li>
+<li>P = D(K1, D(K2, C))</li>
+<li>E(K1, P) = X = D(K2, C)</li>
+</ul></li>
+<li>3DES
+<ul>
+<li>Use 2 Keys</li>
+<li>C = E(K1, D(K2, E(K1,P)))</li>
+<li>EDE provides DES compatibility, set K1 = K2.</li>
+<li>168 bit key</li>
+<li>Slow implementations (DES was old)</li>
+</ul></li>
+<li>AES
+<ul>
+<li>128/192/256 bit keys</li>
+<li>128 bit block</li>
+<li>4 steps, each reversible:</li>
+<li>Byte Substitution</li>
+<li>one S-box used on every byte</li>
+<li>Shift Rows</li>
+<li>permute bytes between columns</li>
+<li>A circular left byte-shift</li>
+<li>Mix Columns</li>
+<li>permutation using matrix multiply</li>
+<li>Add Round Key</li>
+<li>XOR state with key material</li>
+<li>all arithmetic done in GF(2^8)</li>
+</ul></li>
+</ul>
+
+<h1>Block Mode</h1>
+
+<ul>
+<li>ECB (Electronic Code Book)
+<ul>
+<li>Break text into blocks</li>
+<li>Each block is then independently encrypted</li>
+<li>Can rearrange blocks</li>
+</ul></li>
+<li>CBC (Cipher Block Chaining)
+<ul>
+<li>Break text into blocks</li>
+<li>Ci = AES(K,(Pi XOR Ci-1))</li>
+<li>XOR with previous(or IV) then encrypt</li>
+<li>Pros</li>
+<li>Tampering only works for first block</li>
+<li>Cons</li>
+<li>Needs entire sequence to encrypt</li>
+</ul></li>
+<li>CFB (Cipher FeedBack)
+<ul>
+<li>Ci = Pi XOR AES(K, Ci-1)</li>
+<li>Encrypt the previous block then xor with plaintext</li>
+<li>Pros</li>
+<li>Parallelizable decryption</li>
+<li>Cons</li>
+<li>Error in transmission will propagate.</li>
+<li>Needs entire sequence to encrypt</li>
+</ul></li>
+<li>OFB (Output FeedBack)
+<ul>
+<li>Ci= PiXOR Oi</li>
+<li>Oi= AES(K, Oi-1)</li>
+<li>Encrypt IV over and over</li>
+<li>XOR encrypted values with plaintext</li>
+<li>Pros</li>
+<li>Can precompute all of the cipherbits</li>
+<li>Errors will not propagate across blocks</li>
+<li>Cons</li>
+<li>Vulnerable to stream modification</li>
+<li>If attacker knows plaintext Pi</li>
+<li>Ci’ = Pi XOR Pi’ XOR Ci  </li>
+<li>Never reuse a key.</li>
+<li>XOR the cipher texts together and you get the xor of the
+plaintexts.</li>
+</ul></li>
+<li>CTR (Counter)
+<ul>
+<li>Ci = Pi XOR Oi</li>
+<li>Oi = AES(K,i)</li>
+<li>Encrypt some counter</li>
+<li>Xor result with plaintext</li>
+<li>Pros</li>
+<li>Efficient, encryption and decryption can be parallelized</li>
+<li>Allows for out of order encryption/decryption</li>
+<li>Cons</li>
+<li>Never reuse keys.</li>
+</ul></li>
+</ul>
+
+<h1>Stream Cipher</h1>
+
+<ul>
+<li>RC4
+<ul>
+<li>Fast and simple implementation</li>
+<li>Never reuse keys</li>
+<li>used in SSL/TLS, WEP</li>
+<li>Key Scheduling</li>
+<li>Maintain a state array of numbers from 0-255</li>
+<li>Shuffle the state array using Key</li>
+<li>Encryption</li>
+<li>XOR state value with next byte to encrypt</li>
+</ul></li>
+</ul>
+
+<h1>Public Key Cryptography</h1>
+
+<ul>
+<li>Each user has 2 keys
+<ul>
+<li>Secret key</li>
+<li>Public key</li>
+</ul></li>
+<li>Rely on one-way functions that are reverible given some key.
+<ul>
+<li>aka Trap Door functions</li>
+</ul></li>
+<li>Diffie-Hellman
+<ul>
+<li>DH setup</li>
+<li>Agree in advance on</li>
+<li>p(rime)</li>
+<li>g(enerator)</li>
+<li>Each user create</li>
+<li>random private key (a &lt; p)</li>
+<li>computed public key (y_a = g^a mod p)</li>
+<li>Shared key is then</li>
+<li>g^{a x b} mod p</li>
+<li>which is just y<em>a^{b} mod p or y</em>b^{a} mod p</li>
+<li>both of these can be computed by Alice and Bob</li>
+<li>Vulnerable to Man in the Middle attack</li>
+</ul></li>
+<li>RSA
+<ul>
+<li>Block cipher</li>
+<li>Choose large primes p &amp; q, n = p x q</li>
+<li>Fermat's Theorem</li>
+<li>a ^ p = a mod p</li>
+<li>if a &lt; p and p is prime</li>
+<li>Test for compositeness, primeness is not necessarily true</li>
+<li>can know a number is probably prime. or not prime.</li>
+<li>Euler's Theorem</li>
+<li>Totient function φ(n), phi(n), number of positive integers less than n</li>
+<li>a^{φ(n)} mod n = 1</li>
+<li>given two primes p and q where n = p x q</li>
+<li>φ(n)=(p-1)(q-1) </li>
+</ul></li>
+</ul>
+
+<h1>Secure Hash Algorithms, Message Authentication, Digital Signatures</h1>
+
+<h2>Hashing</h2>
+
+<ul>
+<li>Requirements for a secure hash function
+<ol>
+<li>Works for abritrary length messages</li>
+<li>easy/fast to compute hash</li>
+<li>produces a fixed length output</li>
+<li>given <em>hash</em> it's infeasible to find <em>original</em> message</li>
+<li>Pre-image resistance</li>
+<li>given <em>original</em> message it's infeasible to find <em>another</em> message with the
+same hash</li>
+<li>2nd-pre-image resistance</li>
+<li>finding any two messages with the same hash is infeasible</li>
+<li>strong ocllision resistance</li>
+</ol></li>
+<li>Hashing is weak to the birthday attack</li>
+<li>As we know MD5 is a pile of crap
+<ul>
+<li>SHA-1</li>
+<li>160 bit hashes</li>
+<li>SHA-2</li>
+<li>224, 256, 384 or 512 bits</li>
+</ul></li>
+</ul>
+
+<h2>Message Authentication</h2>
+
+<ul>
+<li>protect the <strong>integrity</strong> of a message
+<ul>
+<li>Implemented with encryption, MAC or secure hash function</li>
+</ul></li>
+<li>validate the <strong>identity</strong> of the originator
+<ul>
+<li>Implemented with encryption, MAC or digital signature</li>
+</ul></li>
+<li>know the <strong>origin</strong> of the message
+<ul>
+<li>Implemented with digital signature</li>
+</ul></li>
+<li>MACs
+<ul>
+<li>Message Authentication Codes</li>
+<li>Checksum</li>
+<li>Provides assurance that message is unaltered.</li>
+<li>Requirements (Let m = Message, M = MAC)</li>
+<li>knowing m and M cannot find m' with the same M</li>
+<li>M should be uniformly distributed.</li>
+<li>M should depend equally on all bits of m</li>
+<li>AES-CBC is the standard MAC</li>
+</ul></li>
+<li>Digital Signatures
+<ul>
+<li>Properties</li>
+<li>Must use information unique to the sender</li>
+<li>Relatively easy to make</li>
+<li>Relatively easy to recognize and verify</li>
+<li>computationally infeasible to forge</li>
+<li>Signature associated with a message</li>
+</ul></li>
+</ul>
+
+<h1>Network Attacks</h1>
+
+<ul>
+<li>LAN translation from IP to link-layer addresses 
+<ul>
+<li>ARP cache poisoning by violating protocol assumptions</li>
+<li>Address Resolution Protocol</li>
+<li>Maps IP to Mac Address</li>
+<li>There is no authentication</li>
+<li>ARP always trusts everyone</li>
+</ul></li>
+<li>Network packets pass by/through untrusted hosts
+<ul>
+<li>eavesdropping (packet sniffing)</li>
+</ul></li>
+<li>IP addresses are public
+<ul>
+<li>smurfattacks</li>
+<li>send ICMP requests pretending to come from target</li>
+<li>Every host on the network generates a seply to target</li>
+<li>Ping of Death</li>
+<li>Until '97 ICMP packets larger than 64K would cause a machine to crash</li>
+</ul></li>
+<li>TCP connection requires state
+<ul>
+<li>SYN flooding, port-scanning</li>
+</ul></li>
+<li>TCP state is easy to guess
+<ul>
+<li>TCP spoofing and connection hijacking</li>
+</ul></li>
+<li>User Datagram Protocol(UDP)
+<ul>
+<li>Connectionless transport layer protocol</li>
+<li>just send datagram to application process at specified IP</li>
+<li>DOS by UDP flood</li>
+</ul></li>
+<li>Transmission Control Protocl(TCP)
+<ul>
+<li>Divide datastream into packets</li>
+<li>each packet gets a sequence number</li>
+<li>Receiver reassemples packets and acknowledges receipt</li>
+<li>3-Way Handshake</li>
+<li>Ask server for sync</li>
+<li>Server asks client for sync and acknowledgement</li>
+<li>client respons with acknowledgement</li>
+<li>LAND DoS Attack</li>
+<li>Single packet with source/port equal to destination</li>
+<li>Triggers infinite loop to itself.</li>
+<li>SYN-flooding DoS attack</li>
+<li>DDoS attack.</li>
+<li>Mitigating the attack</li>
+<li>SYN cookies </li>
+<li>return a secure token to clien</li>
+<li>no server state is allocated until client completes the handshake</li>
+<li>Random Deletion</li>
+<li>If queue is full randomly delete an entry</li>
+<li>DoS connection reset</li>
+<li>if attacker can figure out someone elses sequence number</li>
+<li>send packet with reset flag</li>
+</ul></li>
+<li>Domain Name System (DNS)
+<ul>
+<li>Map symbolic names to IP addresses</li>
+<li>Vulnerabilities</li>
+<li>Users/hosts trust mapping provided by DNS</li>
+<li>Interception of DNS</li>
+<li>I can say my site is google now</li>
+</ul></li>
+</ul>
+
+<h1>HTTPS</h1>
+
+<ul>
+<li>Most widely used security protocol</li>
+<li>Works at transport layer</li>
+<li>Works for anything TCP based</li>
+<li>Use a MAC with shared secret key</li>
+<li>Use a symmetric encryption with a shared secret key</li>
+<li>compressed then encrypted</li>
+<li>Operations
+<ul>
+<li>Fragment</li>
+<li>Compress</li>
+<li>Add MAC</li>
+<li>Encrypt</li>
+<li>Append SSL Header</li>
+</ul></li>
+<li>4 phases for handskae
+<ol>
+<li>Hello</li>
+<li>Client tells server what it can do</li>
+<li>Server decides on options that work for both</li>
+<li>Random bytes to be used as session key</li>
+<li>Server sends certificates, key excahnge</li>
+<li>Clien uses certificate to verify server</li>
+<li>Client sends certificates, key exchange</li>
+<li>Change cipher suite and finish handshake</li>
+</ol></li>
+<li>OVerhead
+<ul>
+<li>2-10 times slower than unsecure TCP</li>
+<li>handshake involves client encryption, server decryption</li>
+<li>Data transfer</li>
+</ul></li>
+<li>Vulnerabilities
+<ul>
+<li>Mixed content sites, http -> https</li>
+<li>SSL stripping</li>
+<li>When user switches from http to https attacker imposes MITM</li>
+</ul></li>
+</ul>
+
+<h1>Authenticating Humans</h1>
+
+<ul>
+<li>How to determine you are who you say you are</li>
+<li>Passwords are a poor candidate for this</li>
+<li>Salt
+<ul>
+<li>Append random string to the end of password before hashing</li>
+<li>Ensures attacker can't pre-compute hashes of passwords</li>
+</ul></li>
+<li>Password Phishing
+<ul>
+<li>Malicious website could try using your password on another site</li>
+</ul></li>
+</ul>
+
+<h1>Buffer Overflows</h1>
+
+<ul>
+<li>Required for attack
+<ul>
+<li>no \0 character</li>
+<li>should not crash program before attack program exits</li>
+</ul></li>
+<li>Details vary between CPU’s and OS’s:
+<ul>
+<li>little vs big endian</li>
+<li>stack frame structure</li>
+<li>direction of stack growth</li>
+</ul></li>
+<li>return-to-libc exploit
+<ul>
+<li>set ret-addr to some libc function</li>
+</ul></li>
+<li>Canary 
+<ul>
+<li>Embed a random string into every stack frame</li>
+<li>Verify canary string is unchanged before moving on</li>
+<li>PointGuard</li>
+<li>protects function pointers and setjmp buffers by placing canaries with them</li>
+<li>affects performance</li>
+</ul></li>
+<li>Libsafe
+<ul>
+<li>Intercepts calls to common buffer overflow functions</li>
+<li>checks that there's sufficient space to copy over</li>
+<li>otherwise says no</li>
+</ul></li>
+</ul>
+
+<h1>SQL injection</h1>
+
+<ul>
+<li>Prevention
+<ul>
+<li>black/white list</li>
+<li>Prepared Statements</li>
+<li>use static queries</li>
+<li>bind the variables</li>
+<li>Blacklisting doesn't work</li>
+<li>can miss some characters</li>
+<li>accidently prevent good input</li>
+<li>Prepared statements only works in certain situations</li>
+<li>SELECT, INSERT, UPDATE, DELETE</li>
+<li>Nto applicable if user does something that varies the table</li>
+</ul></li>
+</ul>
+
+<h1>Spam + Phishing</h1>
+
+<ul>
+<li>Email
+<ul>
+<li>SMTP was designed for trusting world</li>
+<li>Received headers are inserted by relays</li>
+<li>don't trust any but the top one</li>
+<li>and only trust it's IP</li>
+<li>domain can be forged</li>
+<li>From header is completely untrustworthy</li>
+</ul></li>
+<li>Spam
+<ul>
+<li>incentives</li>
+<li>ads</li>
+<li>phishing</li>
+<li>scams</li>
+<li>Recruiting crooks</li>
+<li>recruiting bots</li>
+<li>Pump and dump (stocks</li>
+<li>prevention</li>
+<li>Spam blacklists</li>
+<li>blocks servers or ISPs that generate lots of spam</li>
+<li>Thin-thick pipe method</li>
+<li>Have a high speed connection and low speed zombies</li>
+<li>low speed zombies get blocked but high speed connection remains okay</li>
+<li>Graylists</li>
+<li>keep triples of sender, recipient, peer ip</li>
+<li>if triple not in DB reply busy</li>
+<li>second time allow email to pass</li>
+<li>works well?</li>
+<li>Whitelisting</li>
+<li>fill in captcha to email me</li>
+</ul></li>
+<li>Phishing
+<ul>
+<li>image authentication</li>
+<li>use image as second factor </li>
+<li>show image decided by user, if not what htey wanted</li>
+<li>they'll know it's phishing</li>
+</ul></li>
+</ul>
+
+<h1>Web Security</h1>
+
+<ul>
+<li>HTTP is stateless.</li>
+<li>bad ideas to get around this
+<ul>
+<li>Encoding state in url</li>
+<li>Easy to eavesdrop</li>
+<li>URL is not private at all</li>
+<li>Unstable</li>
+<li>Form based session state</li>
+<li>... easily modified</li>
+<li>people actually used this?!</li>
+<li>don't point hidden variable to file and then display it's content</li>
+<li>change it to password file</li>
+<li>GG</li>
+</ul></li>
+<li>C IS FOR COOKIE
+<ul>
+<li>used for:</li>
+<li>Authentication</li>
+<li>Personalization</li>
+<li>Transaction processing</li>
+<li>tracking</li>
+<li>add a MAC to every cookie so user can't edit them</li>
+</ul></li>
+<li>Same-Origin policy
+<ul>
+<li>Only the site that read/modifed information it creates</li>
+<li>does not apply to scripts themselves</li>
+<li>scripts can modify other scripts on the same page</li>
+</ul></li>
+<li>Top 3 Web app vulnerabilities
+<ul>
+<li>SQL injection</li>
+<li>CSRF</li>
+<li>Take cookies from other scripts</li>
+<li>Web apps should refreshe <em>nonce</em> in every <em>form</em> and check in every <em>request</em></li>
+<li>cookie auth is not enough</li>
+<li>Secret Validation tokens</li>
+<li>Referer Validation</li>
+<li>Custom HTTP header</li>
+<li>XSS</li>
+<li>even with Same-Origin Policy sometimes web applications embed user input</li>
+<li>Reflection Attack</li>
+<li>Code in web page executes arbitrary operations</li>
+<li>Steps:</li>
+<li>User visits website</li>
+<li>Receives a malicious link</li>
+<li>Click on valid link</li>
+<li>echo users input</li>
+<li>This causes them to send valuable data to the bad server</li>
+<li>Major issue, failure to sanitize untrusted input</li>
+<li>Persistent (stored XSS)</li>
+<li>Relies on users downloading malicious scripts</li>
+</ul></li>
+</ul>
+
+<h1>Malware</h1>
+
+<ul>
+<li>Three ideas</li>
+<li>Trojan
+<ul>
+<li><strong>Undesired Functionality</li>
+<li>Hidden in code</strong></li>
+<li>Trick users into running your code</li>
+<li>Do not self replicate</li>
+</ul></li>
+<li>Worm
+<ul>
+<li><strong>Undesired Functionality</li>
+<li>Propagates</strong></li>
+<li>Self contained</li>
+</ul></li>
+<li>Virus
+<ul>
+<li><strong>Undesired Functionality</li>
+<li>Propagates</li>
+<li>Hidden in code</strong></li>
+<li>Inserts itself into a host program</li>
+</ul></li>
+<li>AntiVirus
+<ul>
+<li>Signature based</li>
+<li>look for bit patterns</li>
+<li>To combat this bad people encrypt the code</li>
+<li>To combat that use decryptor as signature</li>
+<li>Polymorphic virus, mutate the decryptor code</li>
+<li>sandbox</li>
+<li>Wait for virus to decrypt</li>
+<li>Bam you got it.</li>
+</ul></li>
+</ul>
