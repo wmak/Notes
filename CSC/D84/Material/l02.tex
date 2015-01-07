@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{listings}
+\lstset{language=Python} %declare python as language
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\setcounter{totalnumber}{100}
+
+\title{L02 - Agent states}
+\author{William Mak}
+\date{January 05 2015}
+
+\begin{document}
+
+\maketitle
+\section{agents}
+\begin{enumerate}
+	\item Be intelligent
+	\item Solve a problem perform a task
+	\item Goal, Actions, Utility
+\end{enumerate}
+\textbf{Reactive Agent}
+\begin{enumerate}
+	\item Traction control
+	\item Airplane Flight Control (saftey locks)
+\end{enumerate}
+\subsection{Pacman}
+\textbf{Setup:} Cats \& Mouse
+\begin{enumerate}
+	\item There are N cats (1\-2)
+		\begin{enumerate}
+			\item Cats are randomly moving
+			\item consider walls, other cats
+			\item pseudocode:
+\newpage
+\begin{lstlisting}
+if mouse_in_view:
+	move in mouse direction
+else:
+	move randomly
+
+def mouse_in_view():
+	if mouse.x = cat.x:
+		for block from abs(mouse.x - cat.x):
+			if block == wall:
+				return -1
+		if (mouse.x > cat.x):
+			return right
+		else:
+			return left
+	if mouse.y = cat.y:
+		same as above but up and down.
+\end{lstlisting}
+		\end{enumerate}
+	\item There are K cheese bits
+	\item 1 mouse
+		\begin{enumerate}
+			\item Moves up down left right
+			\item finding cheese \textbf{cannot be reactive}
+		\end{enumerate}
+	\item Agent states
+		\begin{enumerate}
+			\item x, y
+			\item cat visibility
+			\item direction
+			\item etc \dots
+			\item Sensors
+			\item Goals: Eat cheese, stay alive
+			\item Available actions
+		\end{enumerate}
+\end{enumerate}
+\textbf{Statespace}
+\begin{enumerate}
+	\item Set of all possible ``world`` states
+	\item all agents
+	\item all environments
+	\item In cat \& mice consider the case with a 4x4 maze
+		\begin{enumerate}
+			\item \# of possible states? ($16 \times 16$)
+			\item if there were 2 more cats? ($16 \times 16 \times 16 \times 16$)
+			\item good midterm question.
+		\end{enumerate}
+	\item Search space: all possible states that it can become
+	\item in above example would be $4x4 = 16$ states
+\end{enumerate}
+
+\end{document}
