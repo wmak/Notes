@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{listings}
+\lstset{language=Python} %declare python as language
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\setcounter{totalnumber}{100}
+
+\title{L03 \- Search}
+\author{William Mak}
+\date{January 05 2015}
+
+\begin{document}
+
+\maketitle
+\section{Search}
+\begin{enumerate}
+	\item We need a way to determine which nodes are reachable from current
+		node.
+	\item commonly called a successor() function
+	\item goal test.
+	\begin{enumerate}
+		\item Check graph for loops
+		\item we don't go into any of these loops.
+		\item therefore we have a tree.
+	\end{enumerate}
+	\item Our search algorithm then is straight forward
+	\begin{enumerate}
+		\item \textbf{select a node} to expand, we'll keep track of a list of
+			active nodes.
+		\begin{enumerate}
+			\item DFS
+				\begin{enumerate}
+					\item \textbf{implemented:} FIFO Queue
+					\item \textbf{runtime:} $O(b^s)$
+				\end{enumerate}
+			\item BFS
+				\begin{enumerate}
+					\item \textbf{implemented:} Stack + Recursion
+					\item \textbf{runtime:} $O(b^m)$
+				\end{enumerate}
+			\item UCS \- Uniform Cost Search.
+				\begin{enumerate}
+					\item expand cheapest node first. A less special BFS.
+					\item \textbf{implemented:} Priority Queue + Heap.
+				\end{enumerate}
+		\end{enumerate}
+		\item Check for solution.
+		\item \textbf{Add} children of newly expanded node to \underline{active
+			node list} in some \textbf{specified order}.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Heuristic Search}
+\begin{enumerate}
+	\item Get an estimate for how close some node is from goal.
+	\item Manhattan Distance, Euclidian Distance
+	\item come up with a good heuristic \textbf{(Good Exam Question)}
+	\item A* Search
+	\begin{enumerate}
+		\item Heuristic Search
+		\item Compute 'cost' of a node as $f(n) = g(n) + h(n)$
+		\item $g(n) = $ Cost to get to n from s
+		\item $h(n) = $ Heurstic estimate to goal.
+	\end{enumerate}
+	\item Properties of an admissible heuristic: $h(n) \leq h^*(n)$ where $h*(n)$
+		is the true cost to get to n from S
+\end{enumerate}
+
+\end{document}
