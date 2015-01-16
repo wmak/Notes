@@ -79,22 +79,22 @@ import AI_global_data
 # Function definitions
 
 def checkForCats(x,y):
-  # A little helper function to tell you if there is a cat at [x,y].
-  # Returns 1 if there is a cat, 0 otherwise.
-  for i in range(AI_global_data.Ncats):
-   if (AI_global_data.Cats[i][0]==x and AI_global_data.Cats[i][1]==y):
-    return 1
+    # A little helper function to tell you if there is a cat at [x,y].
+    # Returns 1 if there is a cat, 0 otherwise.
+    for i in range(AI_global_data.Ncats):
+        if (AI_global_data.Cats[i][0]==x and AI_global_data.Cats[i][1]==y):
+            return 1
 
-  return 0
+    return 0
 
 def checkForCheese(x,y):
-  # A little helper function to tell you if there is cheese at [x,y].
-  # Returns 1 if there is cheese, 0 otherwise.
-  for i in range(AI_global_data.Ncheese):
-   if (AI_global_data.Cheese[i][0]==x and AI_global_data.Cheese[i][1]==y):
-    return 1
-  
-  return 0
+    # A little helper function to tell you if there is cheese at [x,y].
+    # Returns 1 if there is cheese, 0 otherwise.
+    for i in range(AI_global_data.Ncheese):
+        if (AI_global_data.Cheese[i][0]==x and AI_global_data.Cheese[i][1]==y):
+            return 1
+
+    return 0
 
 def Astar_cost(x,y):
   # Use this function to compute the heuristic cost estimate for
@@ -123,41 +123,102 @@ def Astar_cost_nokitty(x,y):
 			# return your computed cost
 
 def BFS():
-  # Breadth-first search
+    # Breadth-first search
 
-  ###################################################################
-  ## TO DO: Implement BFS here starting at the mouse's location
-  ##        and ending at the cheese location. Be sure to update
-  ##        the Maze[][] array to indicate in which order maze
-  ##        locations were expanded while looking for a path to
-  ##        the cheese. 
-  ##
-  ## Notes:
-  ##        - This is *NOT A RECURSIVE* function. Do not attempt
-  ##          to turn it into a recursion - you will blow the
-  ##          stack easily.
-  ##        - If a path is found, return 1, and update 
-  ##          AI_global_data.MousePath to contain the path 
-  ##          from *END TO START*, that is, the first entry
-  ##          in the list will be the cheese location, and
-  ##          the last entry will be the mouse location.
-  ##          The function will return 1 in this case.
-  ##        - If no path is found, set AI_global_data.MousePath
-  ##          to be an empty list, and return 0. The mouse
-  ##          will wait at its current location for cats to move
-  ##          away from possible paths to the cheese.
-  ##        - Add any local data you need.
-  ##        - Be careful to expand each location only once!
-  ##        - Given a current location [x,y], its neighbours
-  ##          *MUST* be expanded in the following order:
-  ##          top, right, bottom, left.
-  ##	    - Mouse can't go through cats. If your search 
-  ##          reaches a location with a cat, it must backtrack.
-  ##        - If multiple cheese exist, return the path to the
-  ##          first cheese found
-  ###################################################################
+    found = 0
+    Mouse_x = AI_global_data.Mouse[0][0]
+    Mouse_y = AI_global_data.Mouse[0][1]
+    A = AI_global_data.A
+    P = AI_global_data.P
+    queue = [[Mouse_x, Mouse_y]]
+    tranversed = []
+    parents = [[0 for i in range(AI_global_data.msx)] for j in range(AI_global_data.msy)]
+    
+    
+    while (not found):
+        x, y = queue.pop(0)
+        index = (x + (y * AI_global_data.msx))
+        AI_global_data.Maze[x][y] += 1
 
-  return 0	# No path found
+        # Check if the node above is accesible
+        if A[index][0] == 1 and y + 1 < AI_global_data.msy and not checkForCats(x, 
+                y+1) and [x, y + 1] not in tranversed:
+            queue.append([x, y + 1])
+            parents[x][y + 1] = [x, y]
+            if checkForCheese(x, y + 1):
+                found = 1
+                tranversed.append([x,y + 1])
+                break
+        # Check if the node to the right is accesible
+        if A[index][1] == 1 and x + 1 < AI_global_data.msx and not checkForCats(x + 
+                1, y) and [x + 1, y] not in tranversed:
+            queue.append([x + 1, y])
+            parents[x + 1][y] = [x, y]
+            if checkForCheese(x + 1, y):
+                found = 1
+                tranversed.append([x + 1,y])
+                break
+        # Check if the node below is accesible
+        if A[index][2] == 1 and y - 1 >= 0 and not checkForCats(x,
+                y - 1) and [x, y - 1] not in tranversed:
+            queue.append([x, y - 1])
+            parents[x][y - 1] = [x, y]
+            if checkForCheese(x, y - 1):
+                found = 1
+                tranversed.append([x,y - 1])
+                break
+        # Check if the node to the left is accesible
+        if A[index][3] == 1 and x - 1 >= 0 and not checkForCats(x -
+                1, y) and [x - 1, y] not in tranversed:
+            queue.append([x - 1, y])
+            parents[x - 1][y] = [x, y]
+            if checkForCheese(x - 1, y):
+                found = 1
+                tranversed.append([x - 1,y])
+                break
+
+        tranversed.append([x,y])
+    
+    current_x, current_y = tranversed.pop()
+    AI_global_data.MousePath = [[current_x, current_y]]
+
+    while AI_global_data.MousePath[-1] != [Mouse_x, Mouse_y]:
+        current_x, current_y = parents[current_x][current_y]
+        AI_global_data.MousePath.append([current_x, current_y])
+    return found
+        
+
+    ###################################################################
+    ## TO DO: Implement BFS here starting at the mouse's location
+    ##        and ending at the cheese location. Be sure to update
+    ##        the Maze[][] array to indicate in which order maze
+    ##        locations were expanded while looking for a path to
+    ##        the cheese. 
+    ##
+    ## Notes:
+    ##        - This is *NOT A RECURSIVE* function. Do not attempt
+    ##          to turn it into a recursion - you will blow the
+    ##          stack easily.
+    ##        - If a path is found, return 1, and update 
+    ##          AI_global_data.MousePath to contain the path 
+    ##          from *END TO START*, that is, the first entry
+    ##          in the list will be the cheese location, and
+    ##          the last entry will be the mouse location.
+    ##          The function will return 1 in this case.
+    ##        - If no path is found, set AI_global_data.MousePath
+    ##          to be an empty list, and return 0. The mouse
+    ##          will wait at its current location for cats to move
+    ##          away from possible paths to the cheese.
+    ##        - Add any local data you need.
+    ##        - Be careful to expand each location only once!
+    ##        - Given a current location [x,y], its neighbours
+    ##          *MUST* be expanded in the following order:
+    ##          top, right, bottom, left.
+    ##	    - Mouse can't go through cats. If your search 
+    ##          reaches a location with a cat, it must backtrack.
+    ##        - If multiple cheese exist, return the path to the
+    ##          first cheese found
+    ###################################################################
 
 def DFS(DFS_stack,cnt):
   # Depth-first search
