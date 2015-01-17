@@ -97,30 +97,36 @@ def checkForCheese(x,y):
     return 0
 
 def Astar_cost(x,y):
-  # Use this function to compute the heuristic cost estimate for
-  # location [x,y] given the locations of cheese. This function
-  # *MUST NOT* use cat locations in computing the cost. 
+    # Use this function to compute the heuristic cost estimate for
+    # location [x,y] given the locations of cheese. This function
+    # *MUST NOT* use cat locations in computing the cost. 
+    distances = []
+    for i in range(AI_global_data.Ncheese):
+        distances.append(abs(AI_global_data.Cheese[i][0] - x) +
+                abs(AI_global_data.Cheese[i][1] - y))
+    return min(distances)
 
-  ###############################################################
-  ## TO DO: Implement the heuristic cost computation. 
-  ##        Your function must implement an admissible heuristic!
-  ###############################################################
-
-  return 0		# Of course, you should change this to
-			# return your computed cost
 
 def Astar_cost_nokitty(x,y):
   # Use this function to compute the heuristic cost estimate for
   # location [x,y] given the locations of cheese. This function
   # *CAN* use cat locations in computing the cost. 
+    distances = []
+    for i in range(AI_global_data.Ncheese):
+        distances.append(abs(AI_global_data.Cheese[i][0] - x) +
+                abs(AI_global_data.Cheese[i][1] - y))
+    score = min(distances) or 1
+    for j in range(AI_global_data.Ncats):
+        m_dist = (abs(AI_global_data.Cats[j][0] - x) +\
+                abs(AI_global_data.Cats[j][1] - y))
+        if m_dist <= 2:
+            score *= 2
+        if m_dist <= 10:
+            score *= 2
+        if m_dist <= 24:
+            score += 5
+    return score
 
-  ###############################################################
-  ## TO DO: Implement the heuristic cost computation. 
-  ##        Your function must implement an admissible heuristic!
-  ###############################################################
-
-  return 0		# Of course, you should change this to
-			# return your computed cost
 
 def BFS():
     # Breadth-first search
@@ -238,7 +244,96 @@ def DFS(DFS_stack,cnt):
     return 0
 
 def Astar():
-  # A* search
+    # A* search
+
+    found = 0
+    Mouse_x = AI_global_data.Mouse[0][0]
+    Mouse_y = AI_global_data.Mouse[0][1]
+    A = AI_global_data.A
+    P = AI_global_data.P
+    queue = {0 : [[Mouse_x, Mouse_y]]}
+    tranversed = []
+    parents = [[0 for i in range(AI_global_data.msx)] for j in range(AI_global_data.msy)] 
+    
+    while (not found):
+        keys = queue.keys()
+        keys.sort()
+        x, y = queue[keys[0]].pop(0)
+        if queue[keys[0]] == []:
+            queue.pop(keys[0])
+        index = (x + (y * AI_global_data.msx))
+        AI_global_data.Maze[x][y] += 1
+
+        # Check if the node above is accesible
+        if A[index][0] == 1 and y - 1 < AI_global_data.msy and not checkForCats(x, 
+                y - 1) and [x, y - 1] not in tranversed:
+            distance = Astar_cost(x, y - 1)
+            pastcost = P[x][y] + 1
+            P[x][y-1] += 1
+            if queue.has_key(distance + pastcost):
+                queue[distance + pastcost].append([x, y - 1])
+            else:
+                queue.setdefault(distance + pastcost, [[x, y - 1]])
+            parents[x][y - 1] = [x, y]
+            if checkForCheese(x, y - 1):
+                found = 1
+                tranversed.append([x,y - 1])
+                break
+        # Check if the node to the right is accesible
+        if A[index][1] == 1 and x + 1 < AI_global_data.msx and not checkForCats(x + 
+                1, y) and [x + 1, y] not in tranversed:
+            distance = Astar_cost(x + 1, y)
+            pastcost = P[x][y] + 1
+            P[x + 1][y] += 1
+            if queue.has_key(distance + pastcost):
+                queue[distance + pastcost].append([x + 1, y])
+            else:
+                queue.setdefault(distance + pastcost, [[x + 1, y]])
+            parents[x + 1][y] = [x, y]
+            if checkForCheese(x + 1, y):
+                found = 1
+                tranversed.append([x + 1,y])
+                break
+        # Check if the node below is accesible
+        if A[index][2] == 1 and y + 1 >= 0 and not checkForCats(x,
+                y + 1) and [x, y + 1] not in tranversed:
+            distance = Astar_cost(x, y + 1)
+            pastcost = P[x][y] + 1
+            P[x][y + 1] += 1
+            if queue.has_key(distance + pastcost):
+                queue[distance + pastcost].append([x, y + 1])
+            else:
+                queue.setdefault(distance + pastcost, [[x, y + 1]])
+            parents[x][y + 1] = [x, y]
+            if checkForCheese(x, y + 1):
+                found = 1
+                tranversed.append([x,y + 1])
+                break
+        # Check if the node to the left is accesible
+        if A[index][3] == 1 and x - 1 >= 0 and not checkForCats(x -
+                1, y) and [x - 1, y] not in tranversed:
+            distance = Astar_cost(x - 1, y)
+            pastcost = P[x][y] + 1
+            P[x - 1][y] += 1
+            if queue.has_key(distance + pastcost):
+                queue[distance + pastcost].append([x - 1, y])
+            else:
+                queue.setdefault(distance + pastcost, [[x - 1, y]])
+            parents[x - 1][y] = [x, y]
+            if checkForCheese(x - 1, y):
+                found = 1
+                tranversed.append([x - 1,y])
+                break
+
+        tranversed.append([x,y])
+    
+    current_x, current_y = tranversed.pop()
+    AI_global_data.MousePath = [[current_x, current_y]]
+
+    while AI_global_data.MousePath[-1] != [Mouse_x, Mouse_y]:
+        current_x, current_y = parents[current_x][current_y]
+        AI_global_data.MousePath.append([current_x, current_y])
+    return found
 
   ###################################################################
   ## TO DO: Implement A* search as discussed in lecture. Note that
@@ -258,10 +353,100 @@ def Astar():
   ##          the report how you handle this.
   ###################################################################
 
-  return 0 	# No path
-
 def Astar_nokitty():
-  # A* search with cat-dependent heuristic
+    # A* search with cat-dependent heuristic
+
+    found = 0
+    Mouse_x = AI_global_data.Mouse[0][0]
+    Mouse_y = AI_global_data.Mouse[0][1]
+    A = AI_global_data.A
+    P = AI_global_data.P
+    queue = {0 : [[Mouse_x, Mouse_y]]}
+    tranversed = []
+    parents = [[0 for i in range(AI_global_data.msx)] for j in range(AI_global_data.msy)] 
+    
+    while (not found):
+        keys = queue.keys()
+        keys.sort()
+        if keys:
+            x, y = queue[keys[0]].pop(0)
+        else:
+            return 0
+        if queue[keys[0]] == []:
+            queue.pop(keys[0])
+        index = (x + (y * AI_global_data.msx))
+        AI_global_data.Maze[x][y] += 1
+
+        # Check if the node above is accesible
+        if A[index][0] == 1 and y - 1 < AI_global_data.msy and not checkForCats(x, 
+                y - 1) and [x, y - 1] not in tranversed:
+            distance = Astar_cost_nokitty(x, y - 1)
+            pastcost = P[x][y] + 1
+            P[x][y-1] += 1
+            if queue.has_key(distance + pastcost):
+                queue[distance + pastcost].append([x, y - 1])
+            else:
+                queue.setdefault(distance + pastcost, [[x, y - 1]])
+            parents[x][y - 1] = [x, y]
+            if checkForCheese(x, y - 1):
+                found = 1
+                tranversed.append([x,y - 1])
+                break
+        # Check if the node to the right is accesible
+        if A[index][1] == 1 and x + 1 < AI_global_data.msx and not checkForCats(x + 
+                1, y) and [x + 1, y] not in tranversed:
+            distance = Astar_cost_nokitty(x + 1, y)
+            pastcost = P[x][y] + 1
+            P[x + 1][y] += 1
+            if queue.has_key(distance + pastcost):
+                queue[distance + pastcost].append([x + 1, y])
+            else:
+                queue.setdefault(distance + pastcost, [[x + 1, y]])
+            parents[x + 1][y] = [x, y]
+            if checkForCheese(x + 1, y):
+                found = 1
+                tranversed.append([x + 1,y])
+                break
+        # Check if the node below is accesible
+        if A[index][2] == 1 and y + 1 >= 0 and not checkForCats(x,
+                y + 1) and [x, y + 1] not in tranversed:
+            distance = Astar_cost_nokitty(x, y + 1)
+            pastcost = P[x][y] + 1
+            P[x][y + 1] += 1
+            if queue.has_key(distance + pastcost):
+                queue[distance + pastcost].append([x, y + 1])
+            else:
+                queue.setdefault(distance + pastcost, [[x, y + 1]])
+            parents[x][y + 1] = [x, y]
+            if checkForCheese(x, y + 1):
+                found = 1
+                tranversed.append([x,y + 1])
+                break
+        # Check if the node to the left is accesible
+        if A[index][3] == 1 and x - 1 >= 0 and not checkForCats(x -
+                1, y) and [x - 1, y] not in tranversed:
+            distance = Astar_cost_nokitty(x - 1, y)
+            pastcost = P[x][y] + 1
+            P[x - 1][y] += 1
+            if queue.has_key(distance + pastcost):
+                queue[distance + pastcost].append([x - 1, y])
+            else:
+                queue.setdefault(distance + pastcost, [[x - 1, y]])
+            parents[x - 1][y] = [x, y]
+            if checkForCheese(x - 1, y):
+                found = 1
+                tranversed.append([x - 1,y])
+                break
+
+        tranversed.append([x,y])
+    
+    current_x, current_y = tranversed.pop()
+    AI_global_data.MousePath = [[current_x, current_y]]
+
+    while AI_global_data.MousePath[-1] != [Mouse_x, Mouse_y]:
+        current_x, current_y = parents[current_x][current_y]
+        AI_global_data.MousePath.append([current_x, current_y])
+    return found
 
   ###################################################################
   ## TO DO: This is an improved version of A* that not only  
@@ -280,6 +465,3 @@ def Astar_nokitty():
   ###################################################################
 
   # Nothing to return! MousePath is global
-  return
-
-
