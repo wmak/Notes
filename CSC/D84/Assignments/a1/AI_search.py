@@ -111,20 +111,45 @@ def Astar_cost_nokitty(x,y):
   # Use this function to compute the heuristic cost estimate for
   # location [x,y] given the locations of cheese. This function
   # *CAN* use cat locations in computing the cost. 
+    # use junk pile to determine whether the red cheese is there
+    red = False
+    if not AI_global_data.junkpile:
+        AI_global_data.junkpile = [AI_global_data.Cheese[:]]
+    else:
+        for i in AI_global_data.Cheese:
+            if i not in AI_global_data.junkpile[0]:
+                red = i
+                if len(AI_global_data.junkpile) == 1:
+                    AI_global_data.junkpile.append(red)
+                else:
+                    AI_global_data.junkpile[1] = red
+    # if we've just eaten the cheese just do a Astar ignore everything else
     distances = []
-    for i in range(AI_global_data.Ncheese):
-        distances.append(abs(AI_global_data.Cheese[i][0] - x) +
-                abs(AI_global_data.Cheese[i][1] - y))
-    score = min(distances) or 1
-    for j in range(AI_global_data.Ncats):
-        m_dist = (abs(AI_global_data.Cats[j][0] - x) +\
-                abs(AI_global_data.Cats[j][1] - y))
+    if len(AI_global_data.junkpile) == 3:
+        if AI_global_data.junkpile[2] >= 0:
+            print ("SUPER MOUSE!")
+            print (AI_global_data.junkpile)
+            for cheese in AI_global_data.Cheese:
+                distances.append(abs(cheese[0] - x) + abs(cheese[1] - y))
+            return min(distances)
+    for cheese in AI_global_data.Cheese:
+        distance = abs(cheese[0] - x) + abs(cheese[1] - y)
+        # prefer the red cheese.
+        if cheese == red:
+            distance /= 2.0
+        distances.append(distance)
+    min_dist = min(distances or [1])
+    score = 2**(min_dist)
+    if min_dist <= 5: 
+        score = score/((6 - min_dist)/3.0)
+    for cat in AI_global_data.Cats:
+        m_dist = (abs(cat[0] - x) + abs(cat[1] - y))
         if m_dist <= 2:
-            score *= 2
-        if m_dist <= 10:
-            score *= 2
-        if m_dist <= 24:
-            score += 5
+            score *= 5*(6 - m_dist)
+        if m_dist <= 5:
+            score *= 3*(11 - m_dist)
+        if m_dist <= 20:
+            score *= (21 - m_dist)
     return score
 
 
@@ -357,8 +382,13 @@ def Astar_nokitty():
     # A* search with cat-dependent heuristic
 
     found = 0
-    Mouse_x = AI_global_data.Mouse[0][0]
-    Mouse_y = AI_global_data.Mouse[0][1]
+    count = 0
+    Mouse_x, Mouse_y = AI_global_data.Mouse[0]
+    if len(AI_global_data.junkpile) == 2:
+        if AI_global_data.junkpile[1] == AI_global_data.Mouse[0]:
+            AI_global_data.junkpile.append(50)
+    if len(AI_global_data.junkpile) == 3:   
+        AI_global_data.junkpile[2] -= 1
     A = AI_global_data.A
     P = AI_global_data.P
     queue = {0 : [[Mouse_x, Mouse_y]]}
@@ -366,6 +396,7 @@ def Astar_nokitty():
     parents = [[0 for i in range(AI_global_data.msx)] for j in range(AI_global_data.msy)] 
     
     while (not found):
+        count += 1
         keys = queue.keys()
         keys.sort()
         if keys:
@@ -375,7 +406,7 @@ def Astar_nokitty():
         if queue[keys[0]] == []:
             queue.pop(keys[0])
         index = (x + (y * AI_global_data.msx))
-        AI_global_data.Maze[x][y] += 1
+        AI_global_data.Maze[x][y] = count
 
         # Check if the node above is accesible
         if A[index][0] == 1 and y - 1 < AI_global_data.msy and not checkForCats(x, 
