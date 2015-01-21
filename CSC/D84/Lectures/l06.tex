@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\lstset{language=Python} %declare python as language
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\setcounter{totalnumber}{100}
+
+\title{L06 \- Faster Constraint Satisfaction}
+\author{William Mak}
+\date{January 05 2015}
+
+\begin{document}
+
+\maketitle
+\section{running faster}
+How to make Constraint Satisfaction graph faster? (Midterm q)\\
+\begin{enumerate}
+	\item Variable with fewest possible values left to explore. This is because
+		this cuts down on the number of subtree we will have to explore later
+		on. The fewer subtrees the less work we'll have to do.
+	\item Pick variable that intervenes in the most active constraints. Do this
+		if there's a tie in the first principle.
+	\item But what about choosing the value of the variable?
+		\begin{enumerate}
+			\item Choose value that leaves most choices for neighbors. This
+				increases chance that things will work.
+		\end{enumerate}
+\end{enumerate}
+
+\subsection{Early search termination}
+Arc Consistency checking\\
+an arc $x \to y$ is consistent if for every possible vlaue in X there is at
+least one in y that does not break constraints.
+
+\subsection{Running time}
+\begin{enumerate}
+	\item General CSP, n variables, domain of size d
+		\subitem $O(d^n)$
+	\item Split problem into n/c subproblems of size C
+		\subitem $O(\frac{n}{c} \times d^c)$
+	\item If CSP has tree structure (No loops)
+		\subitem $O(nd^2)$
+	\item Suppose I chose C variables whose value I fix 
+		\subitem $O(d^c \times (n-c) \times d^2)$
+\end{enumerate}
+
+\end{document}
