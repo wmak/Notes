@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\lstset{language=Python} %declare python as language
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\setcounter{totalnumber}{100}
+
+\title{L07 \- Faster Constraint Satisfaction}
+\author{William Mak}
+\date{January 05 2015}
+
+\begin{document}
+
+\maketitle
+\section{n -- queens problem}
+\begin{enumerate}
+	\item placing as many queens on a nxn board
+	\item Problem too big to solve exaclty
+	\item Let's define a \underline{neighbourhood}
+		\subitem work  with \underline{complete assignments}
+		\subitem neighbourhood: possible assignments nearby
+		\subitem all configs where only 1 queen is at a different location
+	\item initially you can be random
+		\subitem random row but seperate columns
+\end{enumerate}
+\subsection{algorithm -- Local search AKA(Hill climbing)}
+\begin{enumerate}
+	\item Either exhastively ( if possible )
+	\item or randomly ( when not )
+	\item Choose a config that is better (less broken constraints)
+	\item update current config
+	\item Repeat.
+\end{enumerate}
+\textbf{n queen}
+\subitem operations $\to$ move queens along column
+\subsection{problems wiht Local search}
+\begin{enumerate}
+	\item can't find better
+	\item still have unsatisfied constraints
+	\item this is possible because our initial setup is one that cannot result
+		in the best solution
+	\item the solution? run k times and keep the best solution
+\end{enumerate}
+\subsection{Simulated Annealing}
+\begin{enumerate}
+	\item look around neighbourhood
+		\subitem if better solution found, take it
+		\subitem if not accept with probability
+		\subitem $p \alpha e^{\Delta T/T}$
+	\item $\Delta T$ -- always ($-$) for worse solutions
+		\subitem cost\_current - cost\_proposed
+		\subitem if worse makes cost increase
+		\subitem \textbf{or} cost\_proposed-cost\_current
+		\subitem if cost decreases for worst solution
+	\item T is a parameter called "Temperature"
+		\subitem starts large -- decreases over time
+\end{enumerate}	
+\subsection{Tabu Search}
+Always move towards best solution found in neighbourhood\\
+keep list of recently visited config. Keep them out of neighbourhood
+
+\end{document}
