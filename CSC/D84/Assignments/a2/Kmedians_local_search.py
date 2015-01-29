@@ -37,75 +37,88 @@
 # Updated by: F.J.E. Jan. 2014
 ##########################################################
 
-import Kmedians_global_data
+import Kmedians_global_data as g #renamed g for convenience.
 import random
-import math
+from math import *
+
+def distance(a, b):
+    return sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
 
 def local_search():
-	# This function carries out a local search to improve
-	# the current guess. You can only examine *ONE* possible
-	# update to the current solution per call. That is, at
-	# most one of the current medians should change from
-	# call to call. Note that this procedure is greedy
-	# and will only update the current solution if its
-	# new guess yields a better cost
+    g.current_cost(g.current_medians)
+    old_median = random.choice(g.current_medians)
+    new_median = random.choice(g.all_points)
+    if distance(old_median, new_median) > 250:
+        return
+    new_medians = g.current_medians[:]
+    new_medians.remove(old_median)
+    new_medians.append(new_median)
+    if g.current_cost(g.current_medians) > g.current_cost(new_medians):
+        g.current_medians = new_medians
+    # This function carries out a local search to improve
+    # the current guess. You can only examine *ONE* possible
+    # update to the current solution per call. That is, at
+    # most one of the current medians should change from
+    # call to call. Note that this procedure is greedy
+    # and will only update the current solution if its
+    # new guess yields a better cost
 
-	#####################################################
-	# NEIGHBOURHOOD DEFINITION:
-	# At each step, one of the current guesses for your
-	# median locations can be swaped for another
-	# point as long as the distance between the current
-	# guess and the point is less than 250 units
-	# (this is Euclidean distance of course)
-	# This means that you CAN NOT SWAP with just any
-	# point! Make sure your updates consider this 
-	# simple neighbourhood structure.
-	#
-	# If the proposed swap is more than 250 units away,
-	# do not perform the sawp! just return from this
-	# function with the same guess you started with.
-	#####################################################
+    #####################################################
+    # NEIGHBOURHOOD DEFINITION:
+    # At each step, one of the current guesses for your
+    # median locations can be swaped for another
+    # point as long as the distance between the current
+    # guess and the point is less than 250 units
+    # (this is Euclidean distance of course)
+    # This means that you CAN NOT SWAP with just any
+    # point! Make sure your updates consider this 
+    # simple neighbourhood structure.
+    #
+    # If the proposed swap is more than 250 units away,
+    # do not perform the sawp! just return from this
+    # function with the same guess you started with.
+    #####################################################
 
-	####################################################
-        ## 
-        ## TO DO: Complete this function to perform simple
-        ##        local search for better solutions to the
-        ##        K-medians problem.
-        ##
-        ##        Make sure your code updates the global
-        ##        'current_medians' list!
-        ####################################################
-	
-	return
+    ####################################################
+    ## 
+    ## TO DO: Complete this function to perform simple
+    ##        local search for better solutions to the
+    ##        K-medians problem.
+    ##
+    ##        Make sure your code updates the global
+    ##        'current_medians' list!
+    ####################################################
+
+    return
 
 def deterministic_annealing():
-	# This function carries out a local search using the
-	# deterministic annealing method as discussed in lecture.
-	# The 'temperature' is set by the initKmedians function.
-        # Each call to this function will try a new solution
-        # and accept it under the conditions specified by the
-        # deterministic annealing method.
-        # Also, each call to this function will update the
-	# temperature as T=T*D, where D<1.0 is a decay factor that
-	# controls how quickly the temperature decreases.
-        # Both the temperature and decay factor are global
-        # variables.
- 
-	# Each call to this function can examine only *ONE* 
-	# guess at the solution.
+    # This function carries out a local search using the
+    # deterministic annealing method as discussed in lecture.
+    # The 'temperature' is set by the initKmedians function.
+    # Each call to this function will try a new solution
+    # and accept it under the conditions specified by the
+    # deterministic annealing method.
+    # Also, each call to this function will update the
+    # temperature as T=T*D, where D<1.0 is a decay factor that
+    # controls how quickly the temperature decreases.
+    # Both the temperature and decay factor are global
+    # variables.
 
-	####################################################
-	# THE SAME NEIGHBOURHOOD DEFINITION APPLIES AS FOR 
-	# LOCAL SEARCH ABOVE
-	####################################################
+    # Each call to this function can examine only *ONE* 
+    # guess at the solution.
 
-	####################################################
-        ## 
-        ## TO DO: Complete this function to perform 
-        ##        local search with deterministic annealing.
-        ##
-        ##        Make sure your code updates the global
-        ##        'current_medians' list!
-        ####################################################
+    ####################################################
+    # THE SAME NEIGHBOURHOOD DEFINITION APPLIES AS FOR 
+    # LOCAL SEARCH ABOVE
+    ####################################################
+
+    ####################################################
+    ## 
+    ## TO DO: Complete this function to perform 
+    ##        local search with deterministic annealing.
+    ##
+    ##        Make sure your code updates the global
+    ##        'current_medians' list!
+    ####################################################
 
 	return
