@@ -1,0 +1,15 @@
+Design for the filetable(How it supports fork semantics)
+------------------------
+-Filetable contains a list of objects called ft_file as entries. When a thread is forked, we duplicate the filetable but not the entries in the filetable. 
+-Using ft_file objects are better because they can hold a lot of information about the file
+-ft_file contains a variable refcount to count the number of processes referencing/pointing to it. Multiple processes (child from forks for example) will reference this object instead of creating a copy. As long as a process is referencing the file, we can just keep it stored
+-Both ft_file and filetable contain a lock. Since we’re dealing with forks, there can be multiple processes using these resources at the same time so we need to ensure mutual exclusion
+-The flags variable is to notify whether the file read-only, write-only, etc. It is passed in the syscall so we need to support it. No real need to have anything special for fork
+-Files are represented as a vnode in OS161. The vn variable is a pointer to the vnode representing the file that is opened. No real need to have anything special for fork 
+-The offset variable keeps track of how far in the file we are at.
+
+Biggest challenge
+-The biggest challenge was design the filetable to handle fork semantics
+-Without knowing the scope of the project beforehand, it would be hard to design it properly
+-We started with a skeleton for the filetable and improved it as we went through implementing the functions
+-----------------

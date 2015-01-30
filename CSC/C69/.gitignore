@@ -1,0 +1,7 @@
+.svn*
+build*
+root/*
+*.depend
+*defs.mk
+compile*
+*.o
