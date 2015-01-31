@@ -45,16 +45,6 @@ def distance(a, b):
     return sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
 
 def local_search():
-    g.current_cost(g.current_medians)
-    old_median = random.choice(g.current_medians)
-    new_median = random.choice(g.all_points)
-    if distance(old_median, new_median) > 250:
-        return
-    new_medians = g.current_medians[:]
-    new_medians.remove(old_median)
-    new_medians.append(new_median)
-    if g.current_cost(g.current_medians) > g.current_cost(new_medians):
-        g.current_medians = new_medians
     # This function carries out a local search to improve
     # the current guess. You can only examine *ONE* possible
     # update to the current solution per call. That is, at
@@ -79,17 +69,16 @@ def local_search():
     # function with the same guess you started with.
     #####################################################
 
-    ####################################################
-    ## 
-    ## TO DO: Complete this function to perform simple
-    ##        local search for better solutions to the
-    ##        K-medians problem.
-    ##
-    ##        Make sure your code updates the global
-    ##        'current_medians' list!
-    ####################################################
-
-    return
+    g.current_cost(g.current_medians)
+    old_median = random.choice(g.current_medians)
+    new_median = random.choice(g.all_points)
+    if distance(old_median, new_median) > 250:
+        return
+    new_medians = g.current_medians[:]
+    new_medians.remove(old_median)
+    new_medians.append(new_median)
+    if g.current_cost(g.current_medians) > g.current_cost(new_medians):
+        g.current_medians = new_medians
 
 def deterministic_annealing():
     # This function carries out a local search using the
@@ -111,14 +100,30 @@ def deterministic_annealing():
     # THE SAME NEIGHBOURHOOD DEFINITION APPLIES AS FOR 
     # LOCAL SEARCH ABOVE
     ####################################################
+    # all_points      - List of [x,y] point coordinates
+    # current_medians - List of [x,y] with current medians
+    # N               - Number of points
+    # K               - Number of medians
+    # Temperature	  - Temperature for deterministic annealing
+    # Decay           - Decay factor for deterministic annealing
 
-    ####################################################
-    ## 
-    ## TO DO: Complete this function to perform 
-    ##        local search with deterministic annealing.
-    ##
-    ##        Make sure your code updates the global
-    ##        'current_medians' list!
-    ####################################################
+    g.current_cost(g.current_medians)
+    old_median = random.choice(g.current_medians)
+    new_median = random.choice(g.all_points)
+    if distance(old_median, new_median) > 250:
+        return
+    new_medians = g.current_medians[:]
+    new_medians.remove(old_median)
+    new_medians.append(new_median)
+    dT = abs(g.current_cost(g.current_medians) - g.current_cost(new_medians))
+    P = exp(-dT/g.Temperature)
+    g.Temperature *= g.Decay
+    print("temp: %f" % g.Temperature)
+    print("cost: %f" % g.current_cost(g.current_medians))
+    if g.current_cost(g.current_medians) > g.current_cost(new_medians):
+        g.current_medians = new_medians
+    elif random.random() < P:
+        g.current_medians = new_medians
 
-	return
+
+    return
