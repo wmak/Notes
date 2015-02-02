@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\lstset{language=Python} %declare python as language
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\setcounter{totalnumber}{100}
+
+\title{L09 -- Minimax}
+\author{William Mak}
+\date{January 05 2015}
+
+\begin{document}
+
+\maketitle
+\section{Adversarial Games (Brain Power)}
+\begin{enumerate}
+	\item setup graph each level is made of possible moves by 1 player
+	\item Utility ufnction -- indicates the value of portal config
+		\subitem (+) -- when good for p1 (\-) good for p2
+\end{enumerate}
+\subsection{During game}
+\begin{enumerate}
+	\item Determine if current node is min/max
+	\item Search succesor of node up to max depth
+		\subitem apply utility function to leaf nodes
+	\item back up tree choosing min or max utility from children given node type
+\end{enumerate}
+
+\subsection{Utility function}
+\begin{enumerate}
+	\item  features
+	\item $\sum_{i=1}^{N} w_i f_i(x)$
+	\item $N =$ number of features
+	\item $X =$ some config
+\end{enumerate}
+\textbf{HINT: ON THE EXAM HE MIGHT FUCK WITH US AND HAVE P2 GO FIRST}
+
+\subsection{speed}
+\begin{enumerate}
+	\item This takes too long
+	\item idea -- some paths are quickly found to be \textbf{not promising}
+	\item consider what node above know so far.
+		\subitem Branch \& Bound
+\end{enumerate}
+
+
+\end{document}
