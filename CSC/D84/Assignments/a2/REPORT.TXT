@@ -35,84 +35,135 @@ but explain carefully when needed.
 For experiment 1)
 
 	- What is the average cost of the initial solution (average over all runs)?
+		avg(158.262656091,
+		187.891850427,
+		147.547899294,
+		171.748914927,
+		165.57170334) == 166.2046048158 
 
 	- What is the average cost of the final solution over your five runs?
+		avg(125.629276027,
+		123.876122856,
+		118.353313495,
+		128.121813167,
+		129.923851921) == 125.18087549319998 
+		
 
 	- Does the number of input points have a strong
           influence on the final location of the medians?
           (i.e. are the solutions all similar and reasonable? or do they change wildly?)
+	The solutions were all very similar and reasonable.
+
 
 For experiment 2)
 
 	- Record the initial seed values used:
+		1337, 31337, 8008, 5318008, 1234
 	
 	- What is the average initial cost over all runs?
-
+		avg(140.485652773,
+		137.568695522,
+		145.56782241,
+		161.961871749,
+		128.439397386) == 142.804687968
+		
 	- What is the average final cost over all runs?
+		avg(113.047606729,
+		104.06453702,
+		116.39476071,
+		109.861472118,
+		109.776960491) == 110.6290674136
 
 	- What is the *range* of the final cost values over all runs?
+		12.330223689999997
 
 	- Is the search stable? (i.e. does the initial random
           seed strongly influence the result?
+		not too much 12.33 is relatively very small
 
 For experiment 3)
 
 	- What are the final costs for each temperature?
+		... after hours 250 was at 112.087901
+		100 was 113.410788
+		50 was 112.571839
 
 	- Does the temperature have a strong influence on the goodness
           of the final solution?
+		Not too much...
 
 For experiment 4)
 
 	- What are the final costs for each decay factor?
+		.999 was still 112.087901
+		.99 was 113.592156
+		.9 was 113.729153
 
 	- Does the decay factor strongly influence the goodness of the
 	  final solution?
+		Barely...
 
 From 3) and 4)
 
 	- What is the average final cost for the experiments in 3)?
+		112.69017600000001
 
 	- What is the average final cost for the experiments in 4)?
+		113.13640333333335
 
 	- What is the *best* solution found either in 3) or 4)? (what is its cost?)
+		112.087901
 
 	- Does deterministic annealing (with suitable temperature and
 	  decay) improve the results over standard local search?
 	  if so, by how much? (in % please)
+		yes definitely by about 10%
 
 From 5) and 6)
 	
 	- Record the initial seeds used:
+		123, 456, 789
 
-	- Record the final solution cost for your three DA runs
+	- Recorod the final solution cost for your three DA runs
+		129.652178, 131.656307, 122.019647
 
 	- Record the final solution cost for simple local search
+		124.439711276
 
 	- Overall, does DA improve the solution in a meaningful way?
 	  (give the largest observed % improvement, whether it 
            is positive or negative)
 	  Use the average final cost for DA here
+		9.925939355970059%
+		
 
 From 1) through 6)
 
 	- Does local search produce reasonably good results on this
 	  problem?
+		yeah the results were only about 10% worse. depending on the context
+this would  be acceptable
 
 	- Is Deterministic Annealing worth the extra computation time
 	  on this particular problem?
+		yes. the resulting profits would be worth the few extra hours of
+computation time
 
 For 7) and 8)
 
 	- Record the initial seeds used for DA:
+		123, 456, 789
 
 	- Record the final cost for the solutions found by DA
+		93.757051, 91.360731, 104.633369
 
 	- Record the final cost of the local search solution
+		100.891079582
 
 	- What is the % improvement (positive or negative) of the
 	  DA solutions compared to the local search solutions?
 	  Use the average final cost for DA here.
+		-5% better
 
 Finally:
 
@@ -121,8 +172,10 @@ Finally:
 	  map to one of the possible restaurant locations, your
           cost considers the time it would take to travel from
           that point to the closest restaurant?
-
-	  We need a well thought answer, not a vague statement.
+	
+	I would probably change the distance so that the points close to another
+restaurant would be further that they actually are so that we still try to
+minimize the overall median accordingly
 
 _____________________________________________________
 
@@ -132,9 +185,9 @@ doesn't work, or what problems exist.
 	
 		Complete/Working	Partial		Not done
 
-Local Search
+Local Search	x
 
-D. Annealing
+D. Annealing	x
 _____________________________________________________
 
 Marking:

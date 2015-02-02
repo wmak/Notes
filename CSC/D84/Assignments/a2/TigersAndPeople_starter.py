@@ -263,18 +263,20 @@ def SearchForPlan(some_plan,Left,Right,Boat,Backup):
     #	else:
     #		# Safe configuration - do something different about it
     moves = [
-            [unload_type, "T"],
-            [unload_type, "P"],
-            [cross],
             [load_type, "P"],
+            [unload_type, "T"],
+            [cross],
             [load_type, "T"], 
+            [unload_type, "P"],
             [swap_type, "T"],
             [swap_type, "P"],
         ]
     max_depth = len(Left) + 1
-    def branch(current, Left, Right, Boat, Depth):
+    def branch(current_guess, Depth):
+        current = current_guess[0]
+        L = current_guess[1]
         if Depth >= max_depth:
-            return [current, len(Left)]
+            return current_guess
         guesses = []
         _moves = moves[:]
         # If there are moves, let's remove the ones that make no sense.
@@ -285,17 +287,21 @@ def SearchForPlan(some_plan,Left,Right,Boat,Backup):
                 _moves.remove([cross])
             if current[-1][0] == swap_type:
                 _moves.remove([swap_type, current[-1][1]])
+            if Boat.side == 0:
+                _moves.remove([unload_type, "T"])
+                _moves.append([unload_type, "T"])
+            if Boat.side == 1:
+                _moves.remove([unload_type, "P"])
+                _moves.append([unload_type, "P"])
         for move in _moves:
             new_guess = current[:]
             new_guess.append(move)
-            new_left = Left[:]
-            new_right = Right[:]
             if move != [cross]:
-                plan = RunPlan(new_guess, new_left, new_right, Boat, Backup)
+                plan = RunPlan(new_guess, Left, Right, Boat, Backup)
             else:
                 plan = 0
             if plan == 0:
-                current_guess = branch(new_guess, new_left, new_right, Boat, Depth + 1)
+                current_guess = branch([new_guess, len(Left)], Depth + 1)
                 if current_guess[1] != -1:
                     guesses.append(current_guess)
                 else:
@@ -308,13 +314,13 @@ def SearchForPlan(some_plan,Left,Right,Boat,Backup):
                 best = guess
         return best
     guess = [[], 0]
-    current_left = Left[:]
-    current_right = Right[:]
+    old_guess = guess
     while guess[1] != -1:
-        current_left = Left[:]
-        current_right = Right[:]
-        guess = branch(guess[0], current_left, current_right, Boat, 0)
-        RunPlan(guess[0], current_left, current_right, Boat, Backup)
+        guess = branch(guess, 0)
+        if guess != old_guess:
+            old_guess = guess
+        else:
+            shuffle(moves)
     global plan
     plan = guess[0]
 

@@ -79,6 +79,7 @@ def local_search():
     new_medians.append(new_median)
     if g.current_cost(g.current_medians) > g.current_cost(new_medians):
         g.current_medians = new_medians
+    print g.current_cost(g.current_medians)
 
 def deterministic_annealing():
     # This function carries out a local search using the
