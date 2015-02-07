@@ -60,9 +60,10 @@
 from math import *
 
 # Import global data
-import MiniMax_global_data
+import MiniMax_global_data # Imported like this for preexisting code
+import MiniMax_global_data as gdata # Imported like this cause it makes more sense
 
-debug=1
+debug=0
 
 # Function definitions
 def checkForCats(GameState):
@@ -80,6 +81,10 @@ def checkForCheese(GameState):
         if (GameState[i+1+MiniMax_global_data.Ncats]==GameState[0]):
             return 1
     return 0
+
+# Manhattan Distance calculator
+def distance(a, b):
+    return abs(b[0] - a[0]) + abs(b[1] - a[1])
 
 def MiniMax_utility(GameState, agent_id, depth,alpha,beta):
     ############################################################
@@ -181,9 +186,14 @@ def MiniMax_utility(GameState, agent_id, depth,alpha,beta):
     ##
     ###############################################################
 
-        # Add all your code in this space
-
-    return [pl,utility]	# Of course, by now your utility should be non-zero
+    # Add all your code in this space
+    mouse_location = GameState[0]
+    cheese_distances = [distance(x, mouse_location) for x in GameState[gdata.Ncats + 1:]]
+    cat_distances = [distance(x, mouse_location) for x in GameState[1:1 + gdata.Ncats]]
+    max_distance = gdata.msx + gdata.msy
+    utility += 2 ** (max_distance - min(cheese_distances))
+    utility -= (max_distance - min(cat_distances))
+    return pl, utility	# Of course, by now your utility should be non-zero
 
 def MiniMax_search(GameState, agent_id, depth, alpha, beta):
     ###############################################################
@@ -328,11 +338,17 @@ def MiniMax_search(GameState, agent_id, depth, alpha, beta):
     utilities=[]		# Use this to record utilities for successors
     pls=[]		# Use this to record partial paths returned by successors
     opt_idx=0		# Use this to record the *INDEX* of the winning successor
-    for successor in successors:
-        print successor
-
     # Add all your code in this space
-
+    for successor in successors:
+        current_state = GameState[:] # Create a copy of the gamestate
+        current_state[agent_id] = successor
+        pl, utility = MiniMax_utility(current_state, agent_id, depth, alpha, beta)
+        pls.append(pl)
+        utilities.append(utility)
+    if agent_id >= 1:
+        opt_idx = utilities.index(min(utilities))
+    else:
+        opt_idx = utilities.index(max(utilities))
 
     ################################################################
     ## 
