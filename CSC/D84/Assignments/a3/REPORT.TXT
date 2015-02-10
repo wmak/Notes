@@ -10,11 +10,11 @@ mark.
 
 ________________________________________________
 
-Student Name (last, first):
+Student Name (last, first): Mak William
 
-Student number:
+Student number: 998992988
 
-UTORid:
+UTORid: makwill1
 
 READ THIS AND SIGN YOUR NAME AT THE END:
 
@@ -22,7 +22,7 @@ READ THIS AND SIGN YOUR NAME AT THE END:
 honesty and plaguarism. All work submitted as part
 of this assignment is my own.
 
-	Signed: _(your name goes here)__
+	Signed: _William Mak__
 
 
 (-5 marks for failing to provide the identifying
@@ -37,24 +37,49 @@ but explain carefully when needed.
      how their influence was evaluated and integrated into
      a single, meaningful value. Convince us that your utility
      makes sense!
+	 The utility function started simple. I set it as the maximum manhattan
+distance (msx + msy) subtracted from the distance of each cheese added together.
+This didn't work very well for several reasons. Using all the cheeses meant that
+too many of the nodes were rated highly and the mouse became indecisive. So
+instead of that I switched it to only use the closest cheese. After this I
+switched it to use an exponential function 2 * distance. This means the closer
+the mouse is to a cheese the more likely it is to finish it's job instead of
+running away (in the case where a cat is nearby)
 
 2 .- (2 marks) Ignoring computation time, what is the effect of
      search depth (number of turns) on the chances of the mouse
-     winning the game. 
+     winning the game.
+	 Depending on the context the search depth will etiher make it better or
+worse for the mouse. In some cases it gives the cat a competitive edge. But in
+others it means the mouse can be braver or smarter than the cat.
 
 3 .- (2 marks) What situations will cause your mouse to lose?
      can these be fixed either with the utility function, or
      by changing the search depth? if so, how?
+	 One of the seeds (152) caused my mouse to constantly lose for a while. This
+was because the two started so close to each other. Otherwise the only big issue
+is when the mouse is beside a wall that is also beside a cheese. The mouse
+thinks that the cheese is close so will move away, then back towards the wall.
+This would probably be fixed with a deeper search depth since they would move
+around the wall.
 
 4 .- (2 marks) Does the utility function favour the mouse?
      (yes/no, and a reasonable explanation of why)
+	 Yes, since the utility function only avoids the cat when it's close to the
+mouse. Which means that the cat does not move much until the mouse is closer to
+it.
 
 5 .- (2 marks) Can the mouse be made unbeatable by having an
      optimal utility function?
+	 No because the cat can have access to the same function, as well they are
+able to sit on the cheese and ruin any plan the mouse might have.
 
 6 .- (2 bonus marks) Could a human playing the game in place
       of the mouse do better than your code? (yes, no, and
       a reasonable explanation of why)
+	  Yes with the search depths that I tested with a human could easily beat
+the mice. But with enough search depth the cat would be able to plan so many
+steps ahead of the human they wouldn't be able to do anything
 
 _____________________________________________________
 
@@ -65,11 +90,11 @@ doesn't work, or what problems exist.
 	Complete/Working	Partial		Not done
 
 Utility
- function
+ function	x
 
-MiniMax
+MiniMax		x
 
-Alpha/Beta
+Alpha/Beta	x
  pruning
 _____________________________________________________
 

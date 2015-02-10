@@ -188,11 +188,13 @@ def MiniMax_utility(GameState, agent_id, depth,alpha,beta):
 
     # Add all your code in this space
     mouse_location = GameState[0]
-    cheese_distances = [distance(x, mouse_location) for x in GameState[gdata.Ncats + 1:]]
+    cheese = min([distance(x, mouse_location) for x in GameState[gdata.Ncats + 1:]])
     cat_distances = [distance(x, mouse_location) for x in GameState[1:1 + gdata.Ncats]]
     max_distance = gdata.msx + gdata.msy
-    utility += 2 ** (max_distance - min(cheese_distances))
-    utility -= (max_distance - min(cat_distances))
+
+    utility = (2 ** (max_distance - cheese))
+    if min(cat_distances) <= 2:
+        utility /= (max_distance - min(cat_distances))
     return pl, utility	# Of course, by now your utility should be non-zero
 
 def MiniMax_search(GameState, agent_id, depth, alpha, beta):
@@ -335,6 +337,7 @@ def MiniMax_search(GameState, agent_id, depth, alpha, beta):
     ##        Otherwise, use standard MiniMax search!
     ##        
     ############################################################################
+
     utilities=[]		# Use this to record utilities for successors
     pls=[]		# Use this to record partial paths returned by successors
     opt_idx=0		# Use this to record the *INDEX* of the winning successor
@@ -343,9 +346,20 @@ def MiniMax_search(GameState, agent_id, depth, alpha, beta):
         current_state = GameState[:] # Create a copy of the gamestate
         current_state[agent_id] = successor
         pl, utility = MiniMax_utility(current_state, agent_id, depth, alpha, beta)
-        pls.append(pl)
-        utilities.append(utility)
-    if agent_id >= 1:
+        if pl != [-1, -1] and utility != 0:
+            pls.append(pl)
+            utilities.append(utility)
+            # Alpha Beta pruning
+            if gdata.SearchType == 2:
+                if agent_id:
+                    beta = min(beta, utility)
+                    if beta <= alpha:
+                        break
+                else:
+                    alpha = max(alpha, utility)
+                    if alpha <= beta:
+                        break
+    if agent_id:
         opt_idx = utilities.index(min(utilities))
     else:
         opt_idx = utilities.index(max(utilities))
