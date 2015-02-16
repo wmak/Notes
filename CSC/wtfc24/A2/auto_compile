@@ -1,0 +1,5 @@
+while :
+do
+	clear && sml trees.sml
+	sleep 2
+done

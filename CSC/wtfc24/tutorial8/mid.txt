@@ -1,0 +1,27 @@
+(define compose
+  (lambda (f g)
+    (lambda (x) (f (g x)))))
+
+(define map
+  (lambda (f xs)
+    (if (empty? xs)
+        '()
+        (cons (f (first xs))
+              (map f (rest xs))))))
+
+Prove that for all lists L
+(map f (map g L)) = (map (compose f g) L)
+
+map f '() = '() \\of an empty list
+map f [a, ...] = (f a), (map f ...) 
+compose f g = (lambda (x) (f (g x)))
+
+
+map g L = [(g L[1]), (g L[2])... (g L[n])]
+map f (map g L) = [(f (g L[1])), (f (g L[2]))... (f (g L[n]))]
+
+map (compose f g) L = [(lambda (L[1]) (f (g x))), (lambda (L[2]) (f (g x)))...(lambda(L[n]) (f (g x)))]
+				    = [(f (g L[1])), (f (g L[2])), ... (f (g L[n]))]
+
+Therefore
+(map f (map g L)) = (map (compose f g) L)

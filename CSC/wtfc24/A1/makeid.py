@@ -1,0 +1,1 @@
+makeid = lambda arguments: arguments

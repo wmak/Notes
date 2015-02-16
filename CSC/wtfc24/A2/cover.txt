@@ -1,0 +1,37 @@
+
+
+         CSCC24 -- Winter 2013 -- Assignment 2
+
+         Last Name:         _Mak_
+
+         First Name:        _William_
+
+         Student number:    _998992988_
+
+         UTOR ID:           _makwill1_
+
+ I have read and understood the course policy on collaboration.  All
+ answers are my own, written in isolation, without help from others.
+ This submission is in accordance with the University of Toronto Code
+ of Behavior on Academic Matters.
+
+
+         Signature  _William Mak_   Date _Tue Feb 25 2014_
+
+
+
+         Question 1                                    ____ / 25
+            
+         Question 2                                    ____ / 27
+
+         Question 3                                    ____ / 15
+
+         Question 4                                    ____ / 15
+
+         Documentation                                 ____ / 10
+
+         Coding Style                                  ____ / 20
+
+         Presentation                                  ____ / 10
+
+         Total                                        _____ / 122

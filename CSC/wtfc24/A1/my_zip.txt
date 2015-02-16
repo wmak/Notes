@@ -1,0 +1,8 @@
+The use of lists in python seemed like the best choice, If I wanted to extend
+it to accepting multiple inputs ie 3 lists instead of just two it would be 
+extroidinarily easy. As well I find python's list functions much easier to
+use compared to it's pairs. Which would have been my second choice
+
+
+I used LinkedLists in java cause it seemed like the closest thing to python's
+List type which made converting it much easier.

@@ -1,0 +1,50 @@
+#lang scheme
+
+(require test-engine/scheme-tests)
+(require "diff.ss")
+
+;testing constants
+(check-expect (differentiate 42 'x) 0)
+(check-expect (differentiate 0 'x) 0)
+(check-expect (differentiate 'b 'x) 0)
+(check-expect (differentiate (differentiate 42 'x) 'x) 0)
+
+;testing rules 1 and 2 (addition and subtraction)
+(check-expect (differentiate 'x 'x) 1)
+(check-expect (differentiate '(+ 5 x) 'a) '(+ 0 0))
+(check-expect (differentiate '(+ y x) 'a) '(+ 0 0))
+(check-expect (differentiate '(- 5 x) 'a) '(- 0 0))
+(check-expect (differentiate '(+ 3 a) 'a) '(+ 0 1))
+(check-expect (differentiate '(- 3 a) 'a) '(- 0 1))
+(check-expect (differentiate '(+ (- 3 a) a) 'a) '(+ (- 0 1) 1))
+
+;testing rules 3 and 4 (multiplication and division)
+(check-expect (differentiate '(* 3 a) 'a) '(+ (* a 0) (* 3 1)))
+(check-expect (differentiate '(/ 3 a) 'a) '(/ (- (* a 0) (* 3 1)) (* a a)))
+(check-expect (differentiate '(* 5 6) 'a) '(+ (* 6 0) (* 5 0)))
+(check-expect (differentiate '(/ 5 6) 'b) '(/ (- (* 6 0) (* 5 0)) (* 6 6)))
+(check-expect (differentiate '(* (+ 5 6) 4) 'c) 
+	'(+ (* 4 (+ 0 0)) (* (+ 5 6) 0)))
+(check-expect (differentiate '(/ (- 5 6) 4) 'd) '(/ (- (* 4 (- 0 0))
+	 (* (- 5 6) 0)) (* 4 4)))
+
+
+;testing rules 4 and 5 and consequently 6 (cos, sine and chain rule)
+(check-expect (differentiate '(cos (* y x)) 'y) 
+			'(* (- 0 (sin (* y x))) (+ (* x 1) (* y 0))))
+(check-expect (differentiate '(sin (* y x)) 'y) 
+			'(* (cos (* y x)) (+ (* x 1) (* y 0))))
+(check-expect (differentiate '(* (sin x) y) 'x) 
+			'(+ (* y (* (cos x) 1)) (* (sin x) 0)))
+(check-expect (differentiate '(* (sin x) y) 'y) 
+			'(+ (* y (* (cos x) 0)) (* (sin x) 1)))
+(check-expect (differentiate '(* (sin x) y) 'z) 
+			'(+ (* y (* (cos x) 0)) (* (sin x) 0)))
+(check-expect (differentiate '(/ (cos (- x y)) (+ x y)) 'x)
+			'(/ (- (* (+ x y) (* (- 0 (sin (- x y))) (- 1 0)))
+				(* (cos (- x y)) (+ 1 0)))
+				(* (+ x y) (+ x y))))
+(check-expect (differentiate (differentiate '(* x x) 'x) 'x)
+	'(+ (+ (* 1 1) (* x 0)) (+ (* 1 1) (* x 0))))
+
+(test)
