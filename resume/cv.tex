@@ -1,0 +1,119 @@
+\documentclass[a4paper, 10pt]{article}
+
+%A Few Useful Packages
+\usepackage{marvosym}
+\RequirePackage{color,graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[big]{fullpage} 				%better formatting of the A4 page
+\usepackage[top=1in, bottom=-1.5in, left=0.5in, right=0.5in]{geometry}
+% an alternative to Layaureo can be ** \usepackage{fullpage} **
+\usepackage{titlesec}					%custom \section
+
+%Setup hyperref package, and colours for links
+\usepackage{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
+
+%FONTS
+\usepackage{inconsolata}
+\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+
+%%%
+
+%CV Sections inspired by: 
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{3pt}{3pt}
+%Tweak a bit the top margin
+\addtolength{\voffset}{-1.3cm}
+
+%Italian hyphenation for the word: ''corporations''
+\hyphenation{im-pre-se}
+
+%-------------WATERMARK TEST [**not part of a CV**]---------------
+\usepackage[absolute]{textpos}
+
+\setlength{\TPHorizModule}{30mm}
+\setlength{\TPVertModule}{\TPHorizModule}
+\textblockorigin{2mm}{0.65\paperheight}
+\setlength{\parindent}{0pt}
+
+%--------------------BEGIN DOCUMENT----------------------
+\begin{document}
+
+
+%WATERMARK TEST [**not part of a CV**]---------------
+%\font\wm=''Baskerville:color=787878'' at 8pt
+%\font\wmweb=''Baskerville:color=FF1493'' at 8pt
+%{\wm 
+%	\begin{textblock}{1}(0,0)
+%		\rotatebox{-90}{\parbox{500mm}{
+%			Typeset by Alessandro Plasmati with \XeTeX\  \today\ for 
+%			{\wmweb \href{http://www.aleplasmati.comuv.com}{aleplasmati.comuv.com}}
+%		}
+%	}
+%	\end{textblock}
+%}
+
+\pagestyle{empty} % non-numbered pages
+
+\font\fb=''[cmr10]'' %for use with \LaTeX command
+
+%--------------------TITLE-------------
+\par{\centering
+		{\bf{\Huge William \textsc{Mak}}
+	}\bigskip\par}
+
+%--------------------SECTIONS-----------------------------------
+%Section: Personal Data
+
+\section{\bf{Personal Information}}
+
+\begin{tabular}{rp{7cm}|rp{8cm}}%MiniPage.
+    \textsc{Address:}   & 126 Majestic Drive, Markham Ontario % Omitted from this posting %
+    & {Phone:}     &  (416)-953-7198\\ %Omitted from this posting \\%
+    \textsc{Email:}     & \href{mailto:william@wmak.io}{William@wmak.io}
+    & {GitHub:}    & \href{https://github.com/wmak}{wmak}\\
+\end{tabular}
+\textsc{Education:}  Honours BSc, University of Toronto, Computer Science\\\\
+
+\section{\bf{Technical Skills}}
+\begin{tabular}{rl}
+ Languages:& Python , Go, C, Shell, {\fb \LaTeX}\setmainfont[SmallCapsFont=Fontin-SmallCaps.otf]{Fontin.otf}, Markdown, JavaScript\\
+ Software:& Git, vim, Jenkins, Sublime, svn, TextMate\\
+Operating Systems:& \textbf{arch}\textit{linux}, Debian, Fedora, Mac OS X, Windows \\
+Frameworks:& AngularJS, Django, Selenium, PhoneGap
+\end{tabular}\\\\
+
+%Add points to tell points apart
+%Section: Work Experience
+\section{\bf{Work Experience}}
+\begin{tabular}{r|p{16cm}}
+    \textsc{June 2014} & \bf{Programmer at \emph{University of Toronto Scarborough}}\\
+    \textsc{Present}&{- Constructed a mobile application using HTML, CSS and JavaScript via PhoneGap and Angular}\\
+    &{- Designed the user interface based on user input(ie. Director of \href{http://blog.utsc.utoronto.ca/thehub/}{The Hub}).}\\
+    &{- Wrote a Python script that used Twitter's API to create a blogpost for the Vice-Principal, Research, U of T Scarborough.} \\
+    \multicolumn{2}{c}{} \\
+    \textsc{Sept 2012} & \bf{QA Automation Engineer at \emph{Kobo}, Toronto}\\
+    \textsc{Dec 2013}& {- Engineered tests using Selenium Webdriver library based on the Page Object pattern.}\\
+    &{- Experienced with utilizing the \href{https://github.com/Element-34/py.saunter}{Saunter framework}.} \\
+    &{- Performed Exploratory Testing to identify and communicate defects to developers.} \\
+    &{- Investigated failures with the system to diagnose the root cause of the issue and created defects reports on findings.} \\
+    &{- Configured and maintained a continuous integration test suite using Jenkins.} \\
+    &{- Participated in the Agile Scrum process.} \\
+    &{- Critiqued and reviewed UX designs.} \\
+    \multicolumn{2}{c}{}
+\end{tabular}\\\\
+
+\section{\bf{Personal Projects}}
+\begin{itemize}
+    \item Created a Twitter add-on \href{http://FyrApp.io}{Fyr}(FyrApp.io) that leverages the Twitter and Google APIs to place tweets on a map based on the location of that tweet.
+    \item Designed an \href{http://wmak.io/t.html}{algorithm}(wmak.io/t) using unicode that would be able to store Latitude and Longitude in 4 characters, accurate up to 7 decimal points.
+    \item Participating in an open source project \href{https://github.com/hermes/hermes}{Hermes}(github.com/hermes), a distributed unlimited redundant backup solution written in Go.
+    \item Created a web automation framework around selenium: \href{https://github.com/wmak/selenate}{selenate}(github.com/wmak/selenate), with over 1000 downloads in the first 3 days of release.
+    \item Built a CMS to organize classrooms and tutorials using Django and SQLlite: \\ \href{https://github.com/wmak/Lethargic-Development}{Lethargic-Development} (github.com/wmak/Lethargic-Development).
+    \item Created an image analysis program \href{https://github.com/IrisConstruct/iris}{iris}(github.com/IrisConstruct/iris) that could locate the relative positions of the capturing devices from one another using OpenCV and python.
+    \item Developing a Go implementation of RaptorQ; "The world’s most advanced forward error correction (FEC) code for data networks" \href{https://github.com/hermes/go-raptor}{go-raptor}(github.com/hermes/go-raptor)
+\end{itemize}
+
+\end{document}
