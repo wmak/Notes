@@ -1,14 +1,15 @@
-\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper, 10pt]{article}
 \nonstopmode %Debug mode
 \usepackage[margin=0.7in, left=0.5in, right=0.5in]{geometry}
 \usepackage{hyperref}
+\usepackage{xcolor}
+\newcommand{\uhref}[2]{\href{#1}{\color{gray}#2}}
 
 \pagenumbering{gobble} %Disable page number
 
 \usepackage{inconsolata} % font.
 \renewcommand*\familydefault{\ttdefault}
 \usepackage[T1]{fontenc}
-
 
 %Customize the \section
 \usepackage{titlesec}
@@ -29,14 +30,12 @@
 \section{Personal Data}
 \begin{tabular}{r|p{7.5cm}r|p{8cm}}
 	\textsc{Address}	& 126 Majestic Drive, Markham Ontario
-	&	\textsc{Email}		& \href{mailto:william@wmak.io}{william@wmak.io}\\
+	&	\textsc{Email}		& \uhref{mailto:william@wmak.io}{william@wmak.io}\\
 	\textsc{Phone}		& (416)-953-7198
-	&	\textsc{GitHub}		& \href{https://github.com/wmak}{wmak}\\
+	&	\textsc{GitHub}		& \uhref{https://github.com/wmak}{wmak}\\
 	\textsc{Education}	&
-	\multicolumn{2}
-	{p{9.5cm}}
-	{Honours BSc, University of Toronto, Computer Science}\\
-\end{tabular}\\
+	\multicolumn{2}	{p{9.8cm}}	{Honours BSc, University of Toronto, Computer Science}\\
+\end{tabular}\\\\
 
 
 \section{Technical Skills}
@@ -49,7 +48,7 @@
 	&	\textbf{arch}\textit{linux}, Debian, Fedora, Mac OS X, Windows \\
 	\textsc{Frameworks}
 	&	AngularJS, Django, Selenium, PhoneGap
-\end{tabular}\\
+\end{tabular}\\\\
 
 
 \section{Work Experience}
@@ -58,7 +57,7 @@
 	&	\bf{Programmer at \emph{University of Toronto}}\\
 	\textsc{Present}
 	& - Constructed a mobile application using JavaScript via PhoneGap and AngularJS\\
-	& - Designed the user interface based on user input(ie. Director of \href{http://blog.utsc.ut    oronto.ca/thehub/}{The Hub}).\\
+	& - Designed the user interface based on user input(ie. Director of \uhref{http://blog.utsc.ut    oronto.ca/thehub/}{The Hub}).\\
 	& - Wrote a Python script that used Twitter's API to create a blogpost for
 	the\\&	Vice-Principal of Research, U of T Scarborough.\\
 	\\
@@ -66,30 +65,36 @@
 	&	\bf{QA Automation Engineer \emph{Kobo}}\\
 	\textsc{Dec 2013}
 	& - Engineered tests using Selenium Webdriver library based on the Page Object pattern.\\
- & - Experienced with utilizing the \href{https://github.com/Element-34/py.saunter}{Saunter framework}.\\
- & - Performed Exploratory Testing to identify and communicate defects to developers.\\
- & - Investigated failures with the system to diagnose the root cause of the issue and created defects reports on findings.\\
-\end{tabular}\\
+	& - Experienced with utilizing the \uhref{https://github.com/Element-34/py.saunter}{Saunter framework}.\\
+	& - Performed Exploratory Testing to identify and communicate defects to developers.\\
+	& - Investigated failures with the system to diagnose the root cause of the issue and created defects reports on findings.\\
+	& - Configured and maintained a continuous integration test suite using	Jenkins.\\
+	& - Participated in the Agile Scrum process.\\
+	& - Critiqued and reviewed UX designs.\\
+\end{tabular}\\\\
 
 \section{\bf{Personal Projects}}
 \begin{itemize}
 	\setlength\itemsep{0.1em}
 	\item Created a web automation framework around selenium:
-		\href{https://github.com/wmak/selenate}{selenate}(github.com/wmak/selenate),
+		\uhref{https://github.com/wmak/selenate}{selenate}(github.com/wmak/selenate),
 		with over 1000 downloads in the first 3 days of release.
-	\item Designed an \href{http://wmak.io/t.html}{algorithm}(wmak.io/t) using
+	\item Designed an \uhref{http://wmak.io/t.html}{algorithm}(wmak.io/t) using
 		unicode that would be able to store Latitude and Longitude in 4
 		characters, accurate up to 7 decimal points.  
 	\item Participating in an open source project
-		\href{https://github.com/hermes/hermes}{Hermes}(github.com/hermes), a
+		\uhref{https://github.com/hermes}{Hermes}(github.com/hermes), a
 		distributed unlimited redundant backup solution written in Go.  
 	\item Developed a golf swinging analysis program
-		\href{http://github.com/swingr/}{swingr}(github.com/swingr) that through
+		\uhref{http://github.com/swingr/}{swingr}(github.com/swingr) that through
 		the use of OpenCV would track the head of a golf club giving a user a
 		relative score against a "master" swing.
 	\item Created an image analysis program
-		\href{https://github.com/IrisConstruct/iris}{iris}(github.com/IrisConstruct/iris)
+		\uhref{https://github.com/IrisDS}{iris}(github.com/IrisDS)
 		that could locate the relative positions of the capturing devices from
 		one another using OpenCV and python.
+	\item Developing a Go implementation of RaptorQ; "The world's most advanced
+		forward error correction (FEC) code for data networks"
+		\uhref{https://github.com/hermes/go-raptor}{go-raptor}(github.com/hermes/go-raptor)
 \end{itemize}
 \end{document}
