@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\lstset{language=Python} %declare python as language
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\setcounter{totalnumber}{100}
+
+\title{L10 -- Minimax continued}
+\author{William Mak}
+\date{January 05 2015}
+
+\begin{document}
+
+\maketitle
+\section{Which paths to ignore}
+\begin{enumerate}
+\item if search depth is small
+  \subitem not very good
+\item if search depth is large
+  \subitem slow
+\item the problem then comes down to how much time and computing power you have
+\item $\alpha_!\beta$ pruning
+  \begin{enumerate}
+  \item start $\alpha=-\infty$, $\beta=\infty$
+  \item P1 updates $\alpha$ and P2 updates $\beta$
+  \item P1 prunes based on $\beta$ while P2 prunes based on $\alpha$
+    \item from $b\approx\sqrt b \approx 2 * depth$ where $b=$branching factor
+  \end{enumerate}
+\end{enumerate}
+  
+
+\end{document}
