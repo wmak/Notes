@@ -62,7 +62,11 @@ from math import *
 from numpy import *
 
 # Import global data
-import QLearn_global_data
+import QLearn_global_data as gdata
+
+#compute the manhattan distance
+def mdist(a, b):
+    return abs(b[0] - a[0]) + abs(b[1] - a[1])
 
 # Hack to keep around some static data
 
@@ -88,13 +92,14 @@ def QLearn(s,a,r,s_new):
     # Return values: NONE
     ####################################################################
 
-    ####################################################################
-    ## TO DO:
-    ##       Implement this functin to carry out the Qtable updates
-    ##	 This is a 1-line function! (it's a long line)
-    ####################################################################
+    gdata.Qtable[s][a] +=\
+        gdata.alpha *\
+        (r + gdata.lamb *\
+           (gdata.Qtable[s_new][decideAction(s_new)])
+           - gdata.Qtable[s][a]
+        )
 
-    return
+    return None
 
 def reward():
     ####################################################################
@@ -113,15 +118,18 @@ def reward():
     # ability of your mouse to learn!
     ####################################################################
 
-    ####################################################################
-    ## TO DO:
-    ##	Implement the reward function. It must return a real-valued
-    ##	scalar reward appropriate for the current game configuration.
-    ##
-    ##	Document this function carefully in the REPORT.TXT
-    ####################################################################
-
-    return 0  	# Replace with your computed reward
+    mouse = gdata.Mouse[0]
+    cat = gdata.Cats[0]
+    cheese = gdata.Cheese[0]
+    msx, msy = gdata.msx, gdata.msy
+    max_dist = msx + msy
+    cat_dist = mdist(mouse, cat)
+    cheese_dist = mdist(mouse, cheese)
+    if cat_dist < 2 and cheese_dist > 2:
+        return -1
+    elif cheese_dist < 2:
+        return 10
+    return 0
 
 def decideAction(s):
     ####################################################################
@@ -134,21 +142,19 @@ def decideAction(s):
     # wall. You must somehow use the Qtable and the A[][] adjacency
     # list to determine where the mouse should go.
     ####################################################################
-
-    ####################################################################
-    ## TO DO:
-    ##  	Implement this function to enable the mouse to choose an
-    ##	optimal action for any given state 's'
-    ##
-    ##	The function MUST RETURN the *INDEX* of the optimal move
-    ##	as follows:
-    ##			idx=0 -> Mouse moves up
-    ##			idx=1 -> Mouse moves right
-    ##			idx=2 -> Mouse moves down
-    ##			idx=3 -> Mouse moves left
-    ####################################################################
-
-    return 0	# Replace this with your return value!
+    
+    mouse = gdata.Mouse[0]
+    A_index = mouse[0] + (mouse[1] * gdata.msx)
+    adjacency = gdata.A[A_index].tolist()
+    possible = gdata.Qtable[s][:].tolist()
+    val = None
+    for direction in range(4):
+        if adjacency[direction]:
+            if val == None:
+                val = direction
+            elif possible[direction] > possible[val]:
+                val = direction
+    return val
 
 ############################################################################
 #
@@ -279,16 +285,16 @@ def QLearn_features(a,r):
     ####################################################################
 
     # Make local copies of the current config. Do not mess with the globals!
-    mousep=list(QLearn_global_data.Mouse)
-    catp=list(QLearn_global_data.Cats)
-    cheesep=list(QLearn_global_data.Cheese)
+    mousep=list(gdata.Mouse)
+    catp=list(gdata.Cats)
+    cheesep=list(gdata.Cheese)
 
     # First time through this code we need to initialize the weights
     # Requires a working 'evaluateFeatures' function!
-    if (len(QLearn_global_data.Qweights)==0):
+    if (len(gdata.Qweights)==0):
         dummy_features=evaluateFeatures(mousep,catp,cheesep)
         for i in range(len(dummy_features)):
-            QLearn_global_data.Qweights.append(0.0);
+            gdata.Qweights.append(0.0);
 
     ####################################################################
     #
