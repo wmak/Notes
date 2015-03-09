@@ -67,7 +67,7 @@ import QLearn_global_data as gdata
 
 #compute the manhattan distance
 def mdist(a, b):
-    return abs(b[0] - a[0]) + abs(b[1] - a[1])
+    return float(abs(b[0] - a[0]) + abs(b[1] - a[1]))
 
 # Hack to keep around some static data
 
@@ -213,16 +213,21 @@ def evaluateFeatures(mousep, catp, cheesep):
     #
     ###################################################################
 
-    ###################################################################
-    #
-    #  TO DO:
-    #         Implement your feature computations and return the
-    #         list of the current features given the positions of
-    #         the agents, and the maze
-    ###################################################################
 
     feature_list=[]		# Add as many features as you need!
 
+    mouse = mousep[0]
+    walls = sum(gdata.A[mouse[0] + (mouse[1] * gdata.msx)])
+    cheese = [mdist(mouse, current) for current in cheesep]
+    cat = [mdist(mouse, current) for current in catp]
+    max_dist = gdata.msx + gdata.msy
+
+    feature_list.append(cheese[0]/max_dist)
+    feature_list.append(-1.0 * cat[0]/max_dist)
+    if len(cat) > 1:
+        feature_list.append(-1.0 * cat[1]/max_dist)
+    feature_list.append(walls)
+    
     return feature_list
 
 def evaluateQsa(feature_list):
@@ -240,13 +245,11 @@ def evaluateQsa(feature_list):
     # feature_list.
     ####################################################################
 
-    ####################################################################
-    #
-    # TO DO: Complete this function and return the value for Q(s,a)
-    #
-    ####################################################################
+    total = 0
+    for i in range(len(feature_list)):
+        total += gdata.Qweights[i] * feature_list[i]
 
-    return 0	# Replace with your own code
+    return total
 
 def maxQsa_prime(mousep,catp,cheesep):
     ####################################################################
@@ -272,7 +275,20 @@ def maxQsa_prime(mousep,catp,cheesep):
     #
     ####################################################################
 
-    return [0,0]      # Replace with your code
+    x, y = gdata.Mouse[0]
+    A_index = x + (y * gdata.msx)
+    adjacency = gdata.A[A_index]
+    neighbors = [[x, y - 1], [x + 1, y], [x, y + 1], [x - 1, y]]
+    val = None
+    for direction in range(4):
+        if adjacency[direction]:
+            currentQ = evaluateQsa(evaluateFeatures([neighbors[direction]], 
+                catp, cheesep))
+            if val == None:
+                val = [direction, currentQ]
+            elif currentQ > val[1]:
+                val = [direction, currentQ]
+    return val
 
 def QLearn_features(a,r):
     ####################################################################
@@ -299,16 +315,12 @@ def QLearn_features(a,r):
         for i in range(len(dummy_features)):
             gdata.Qweights.append(0.0);
 
-    ####################################################################
-    #
-    # TO DO: Carry out the QLearning weight update!
-    #  remember:  By the time you get here, the mouse has already moved
-    #             (i.e. you are already at state s'). However, if you
-    #             compute your features right now, and evaluate Q, you
-    #             will obtain Q(s,a), which is the expected utility of
-    #             carrying out action a from s. Don't get confused!
-    #
-    ####################################################################
+    features = evaluateFeatures(mousep, catp, cheesep)
+    currentQ = evaluateQsa(features)
+    val = maxQsa_prime(mousep, catp, cheesep)
+    for i in range(len(features)):
+        gdata.Qweights[i] += gdata.alpha *\
+            (r + (gdata.lamb * val[1]) - currentQ) * features[i]
 
     return
 
@@ -323,11 +335,4 @@ def decideAction_features(mousep, catp, cheesep):
     # described in 'decideAction' above
     ####################################################################
 
-    ####################################################################
-    #
-    # TO DO: Complete this function.
-    #
-    ####################################################################
-
-    return 0	# Replace with your own code
-
+    return maxQsa_prime(mousep, catp, cheesep)[0]

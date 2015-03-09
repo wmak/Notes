@@ -10,11 +10,11 @@ mark.
 
 ________________________________________________
 
-Student Name (last, first):
+Student Name (last, first): Mak, William
 
-Student number:
+Student number: 998992988
 
-UTORid:
+UTORid: makwill1
 
 READ THIS AND SIGN YOUR NAME AT THE END:
 
@@ -22,7 +22,7 @@ READ THIS AND SIGN YOUR NAME AT THE END:
 honesty and plaguarism. All work submitted as part
 of this assignment is my own.
 
-	Signed: _(your name goes here)__
+	Signed: _William Mak__
 
 
 (-5 marks for failing to provide the identifying
@@ -35,6 +35,12 @@ but explain carefully when needed.
 1 .- (2 marks) Explain your reward function. What game elements
       are used, and why you think this is a good reward function
       for this problem.
+	My reward function started simple, if the mouse lands on a cheese then
+reward highly. If the mouse lands on a cat reward negatively. But after watching
+this for a while I notec that my mouse would become cornered running away from
+cats. So i tried to implement something so that my mouse would avoid corners.
+And then i realized i should have my mouse avoid cats more strongly so i made
+spots near the cat dangerous as well.
 
 2 .- (3 marks) These are multiple experiments (once you are sure your 
      QLearning code is working!) 
@@ -50,7 +56,7 @@ but explain carefully when needed.
  
      Run at least 50 rounds of the game. 
 
-     Record the mouse winning rate:
+     Record the mouse winning rate: 0.22
 
      # Experiment 2
      initGame(1522,1)
@@ -101,10 +107,17 @@ but explain carefully when needed.
 5 .- (2 marks) Is standard Q-Learning a rasonable strategy for environments
      that change constantly? discuss based on the above
 
+	No there is too much dependence on the makeup of the environment and not
+enough on a case to case statement
+
 
 7 .- (5 marks) Explain your feature set for feature-based Q Learning, and
                explain why and how each feature is expected to contribute
 	       to helping your mouse win
+	I kept my features simple. The distance to the closest cheese. The distance
+to the closest cat but negatively. And the number of walls. The reason i chose
+each of these is basically a feature version of what I learned from the first
+implementation
 
 8 .- (5 marks) Carry out the following experiments:
 
@@ -120,7 +133,7 @@ but explain carefully when needed.
 
      doGame()
 
-     Record the mouse winning rate after 50 rounds:
+     Record the mouse winning rate after 50 rounds: 0.037037037037
 
      Experiment 1:
 
@@ -148,6 +161,7 @@ but explain carefully when needed.
 9 .- (5 marks) Based on the above, is feature-based learning better at
      dealing with changing environments than standard Q-learning?
      Provide a convincing (but short!) argument!
+	 yes clearly it if given that the two ratios are quite close to each other.
 
 
 _____________________________________________________
@@ -158,24 +172,24 @@ doesn't work, or what problems exist.
 	
 			Complete/Working	Partial		Not done
 
-QLearn 
+QLearn			x
  update
 
-Reward
+Reward			x
  function
 
-Decide
+Decide			x
  action
 
-featureEval
+featureEval		x
 
-evaluateQsa
+evaluateQsa		x
 
-maxQsa_prime
+maxQsa_prime	x
 
-Qlearn_features
+Qlearn_features	x
 
-decideAction_features
+decideAction_features x
 
 _____________________________________________________
 
