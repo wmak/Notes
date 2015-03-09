@@ -224,7 +224,7 @@ def evaluateFeatures(mousep, catp, cheesep):
     feature_list.append(-1.0 * cat[0]/max_dist)
     if len(cat) > 1:
         feature_list.append(-1.0 * cat[1]/max_dist)
-    feature_list.append(walls)
+    feature_list.append(walls/4.0)
     
     return feature_list
 

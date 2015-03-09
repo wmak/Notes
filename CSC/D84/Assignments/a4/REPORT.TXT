@@ -155,19 +155,20 @@ implementation
      initGame(31415,2,2,3)
      doGame()
 
-     Report mouse winning rate after 50 rounds:
+     Report mouse winning rate after 50 rounds: 0.241379310345
 
-     Experiment 2:
+     Experiment 2: 
 
      initGame(31415,3,2,3)
      doGame()
 
-     Report mouse winning rate after 50 rounds:
+     Report mouse winning rate after 50 rounds: 0.06
 
 9 .- (5 marks) Based on the above, is feature-based learning better at
      dealing with changing environments than standard Q-learning?
      Provide a convincing (but short!) argument!
-	 yes clearly it if given that the two ratios are quite close to each other.
+	No clearly not, on the larger map the mouse was very confused about what to
+do.
 
 
 _____________________________________________________
