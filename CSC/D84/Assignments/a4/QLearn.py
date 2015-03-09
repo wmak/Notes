@@ -60,6 +60,7 @@
 
 from math import *
 from numpy import *
+import random
 
 # Import global data
 import QLearn_global_data as gdata
@@ -95,11 +96,9 @@ def QLearn(s,a,r,s_new):
     gdata.Qtable[s][a] +=\
         gdata.alpha *\
         (r + gdata.lamb *\
-           (gdata.Qtable[s_new][decideAction(s_new)])
+           max(gdata.Qtable[s_new])
            - gdata.Qtable[s][a]
         )
-
-    return None
 
 def reward():
     ####################################################################
@@ -119,16 +118,18 @@ def reward():
     ####################################################################
 
     mouse = gdata.Mouse[0]
-    cat = gdata.Cats[0]
-    cheese = gdata.Cheese[0]
-    msx, msy = gdata.msx, gdata.msy
-    max_dist = msx + msy
-    cat_dist = mdist(mouse, cat)
-    cheese_dist = mdist(mouse, cheese)
-    if cat_dist < 2 and cheese_dist > 2:
-        return -1
-    elif cheese_dist < 2:
+    cheese = [mdist(mouse, current) for current in gdata.Cheese]
+    cat = [mdist(mouse, current) for current in gdata.Cats]
+    if mouse in gdata.Cats:
+        return -10
+    if mouse in gdata.Cheese:
         return 10
+    if cat <= 1:
+        return -7
+    if sum(gdata.A[mouse[0] + (mouse[1] * gdata.msx)]) == 1:
+        return -4
+    if sum(gdata.A[mouse[0] + (mouse[1] * gdata.msx)]) == 2:
+        return 1
     return 0
 
 def decideAction(s):
@@ -145,16 +146,18 @@ def decideAction(s):
     
     mouse = gdata.Mouse[0]
     A_index = mouse[0] + (mouse[1] * gdata.msx)
-    adjacency = gdata.A[A_index].tolist()
-    possible = gdata.Qtable[s][:].tolist()
+    adjacency = gdata.A[A_index]
+    possible = gdata.Qtable[s]
     val = None
     for direction in range(4):
         if adjacency[direction]:
             if val == None:
-                val = direction
-            elif possible[direction] > possible[val]:
-                val = direction
-    return val
+                val = [direction]
+            elif possible[direction] > possible[val[0]]:
+                val = [direction]
+            elif possible[direction] == possible[val[0]]:
+                val.append(direction)
+    return val[0]
 
 ############################################################################
 #
