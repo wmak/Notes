@@ -121,10 +121,15 @@ enough on a case to case statement
 7 .- (5 marks) Explain your feature set for feature-based Q Learning, and
                explain why and how each feature is expected to contribute
 	       to helping your mouse win
-	I kept my features simple. The distance to the closest cheese. The distance
-to the closest cat but negatively. And the number of walls. The reason i chose
-each of these is basically a feature version of what I learned from the first
-implementation
+	My first feature was the number of cheese left, the idea here was that the
+mouse should be trying to get this down to zero to motivate it to keep chasing
+the cheese rather than trying to survive.
+	My second feature was the distance to the closest cheese.
+	Next was the distances to the two closest cats so the mouse would try to
+preserve it's own life
+	Then it was a corner value which i took from the non feature implementation
+	Finally the last two values were whether the cat was able to eat a cheese
+and whether  it died
 
 8 .- (5 marks) Carry out the following experiments:
 
@@ -156,21 +161,21 @@ implementation
      initGame(31415,2,2,3)
      doGame()
 
-     Report mouse winning rate after 50 rounds: 0.241379310345
+     Report mouse winning rate after 50 rounds: 0.588235294118
 
      Experiment 2: 
 
      initGame(31415,3,2,3)
      doGame()
 
-     Report mouse winning rate after 50 rounds: 0.06
+     Report mouse winning rate after 50 rounds: 0.604651162791
 
 9 .- (5 marks) Based on the above, is feature-based learning better at
      dealing with changing environments than standard Q-learning?
      Provide a convincing (but short!) argument!
-	No clearly not, on the larger map the mouse was very confused about what to
-do.
-
+	Yes this method of Q-learning seems to deal better with changing
+environments compared with stadndard Q-learning given that the ratios were quite
+close to one another.
 
 _____________________________________________________
 

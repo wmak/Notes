@@ -215,16 +215,47 @@ def evaluateFeatures(mousep, catp, cheesep):
     feature_list=[]		# Add as many features as you need!
 
     mouse = mousep[0]
+    # count the number of walls
     walls = sum(gdata.A[mouse[0] + (mouse[1] * gdata.msx)])
+    # check the distance up to each cheese
     cheese = [mdist(mouse, current) for current in cheesep]
+    # check the distance up to each cat
     cat = [mdist(mouse, current) for current in catp]
+    # check if the mouse is dead
+    if mouse in catp:
+        death = -1
+    else:
+        death = 1
+    # check if the mouse has managed to eat
+    if mouse in cheesep:
+        win = 1
+    else:
+        win = -1
+    # avoid corners
+    if walls == 1:
+        corner = -1
+    elif walls == 2:
+        corner = 0
+    else:
+        corner = 1
     max_dist = gdata.msx + gdata.msy
 
-    feature_list.append(cheese[0]/max_dist)
+    # Try to minimize the number of cheese left
+    feature_list.append(len(cheesep)/gdata.Ncheese)
+    cheese.sort()
+    # Try to get closer to cheese
+    feature_list.append((max_dist - cheese[0])/max_dist)
+
+    # Try to get further from cats
+    cat.sort()
     feature_list.append(-1.0 * cat[0]/max_dist)
     if len(cat) > 1:
         feature_list.append(-1.0 * cat[1]/max_dist)
-    feature_list.append(walls/4.0)
+    else:
+        feature_list.append(0)
+    feature_list.append(corner)
+    feature_list.append(death)
+    feature_list.append(win)
     
     return feature_list
 
