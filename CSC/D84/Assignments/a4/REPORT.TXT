@@ -66,10 +66,13 @@ spots near the cat dangerous as well.
 
      Run at least 50 rounds of the game. 
 
-     Record the mouse winning rate:
+     Record the mouse winning rate: 0.813559322034
 
      Would the mouse keep improving and become invincible if
      you ran, say, 100,000,000 training rounds per batch?
+
+	 I don't think so, there still would exist scenarios where the mouse would
+lose regardless of the actions that it might take
      
 
 4 .- (3 marks) 
@@ -85,24 +88,27 @@ spots near the cat dangerous as well.
      initGame(4289,1)
      doGame()
 	
-     Mouse Winning Rate:
+     Mouse Winning Rate: 0.321428571429
 
      # 2
      initGame(31415,1)
      doGame()
 	
-     Mouse Winning Rate:
+     Mouse Winning Rate: 0.536585365854
 
      # 3
      initGame(3210,1)
      doGame()
 	
-     Mouse Winning Rate:
+     Mouse Winning Rate: 0.511682242991
 
-     Average winning rate:
+     Average winning rate: 0.4565653934246667
 
      Explain the above numbers compared to the winning rates in 3),
      and provide some insight as to what is going on. 
+	The QTable has been created based on the original seed. So at some
+coordinate the best move is being blocked by the wall, and thus the mouse is
+making suboptimal moves
 
 5 .- (2 marks) Is standard Q-Learning a rasonable strategy for environments
      that change constantly? discuss based on the above

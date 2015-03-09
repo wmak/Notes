@@ -128,8 +128,6 @@ def reward():
         return -7
     if sum(gdata.A[mouse[0] + (mouse[1] * gdata.msx)]) == 1:
         return -4
-    if sum(gdata.A[mouse[0] + (mouse[1] * gdata.msx)]) == 2:
-        return 1
     return 0
 
 def decideAction(s):
