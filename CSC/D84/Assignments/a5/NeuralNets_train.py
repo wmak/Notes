@@ -67,11 +67,11 @@ import math
 from numpy import *
 
 def sigmoid(x):
-	
-	if NeuralNets_global_data.sig_type:
-		return(tanhyp(x))
-	else:
-		return(logistic(x))
+
+    if NeuralNets_global_data.sig_type:
+        return(tanhyp(x))
+    else:
+        return(logistic(x))
 
 def logistic(x):
 ##########################################################
@@ -80,7 +80,7 @@ def logistic(x):
 #
 ##########################################################
 
-	return(0.0)
+    return(0.0)
 
 def tanhyp(x):
 ##########################################################
@@ -90,7 +90,7 @@ def tanhyp(x):
 #
 ##########################################################
 
-	return(0.0)
+    return(0.0)
 
 def sigmoid_prime(a):
 ##########################################################
@@ -100,10 +100,10 @@ def sigmoid_prime(a):
 #        of the output of the neuron.
 #
 ##########################################################
-	if (NeuralNets_global_data.sig_type):
-		return(0.0)		# Change this as needed!
-	else:
-		return(0.0)		# Change this as needed
+    if (NeuralNets_global_data.sig_type):
+        return(0.0)     # Change this as needed!
+    else:
+        return(0.0)     # Change this as needed
 
 def FeedForward(input_sample):
 ##########################################################
@@ -129,20 +129,20 @@ def FeedForward(input_sample):
 #       called depending on what the user specifies.
 ##########################################################
 
-	outputActivation=zeros(shape=(NeuralNets_global_data.N_out,1))		# Array of activation values for output units
-	hiddenActivation=zeros(shape=(NeuralNets_global_data.N_hidden,1))	# Array of activation values for hidden units
-	# DO remember that the last entry in hiddenActivation should be a constant
-	# bias term = 1.0!
+    outputActivation=zeros(shape=(NeuralNets_global_data.N_out,1))		# Array of activation values for output units
+    hiddenActivation=zeros(shape=(NeuralNets_global_data.N_hidden,1))	# Array of activation values for hidden units
+    # DO remember that the last entry in hiddenActivation should be a constant
+    # bias term = 1.0!
 
-	##########################################################
-	#
-	# TO DO: Complete this function to compute the activation
-	#        values for each neuron in the network.
-	#
-	##########################################################
+    ##########################################################
+    #
+    # TO DO: Complete this function to compute the activation
+    #        values for each neuron in the network.
+    #
+    ##########################################################
 
 
-	return [outputActivation,hiddenActivation]
+    return [outputActivation,hiddenActivation]
 
 def trainOneSample(input_sample, input_label):
 ################################################################
@@ -172,31 +172,30 @@ def trainOneSample(input_sample, input_label):
 #       the output of the neuron.
 ################################################################
 
-	###############################################################
-	# Use the 'errors' array to store the error between each
-	# output neuron and the target value. 
-	# Error is defined as e=target - output
-	# 
-        # We have one output neuron per digit. The 'target' output
-        #   should be as follows:
-        #      When using the logistic function as the activation
-        #          - Correct output neuron should output .8
-        #          - All others should output .2
-        #      When using the hyperbolic tangent as the activation
-        #	   - Correct output neuron should output .6
-        #          - All other neurons should output -.6
-       	###############################################################
+    ###############################################################
+    # Use the 'errors' array to store the error between each
+    # output neuron and the target value. 
+    # Error is defined as e=target - output
+    # 
+    # We have one output neuron per digit. The 'target' output
+    #   should be as follows:
+    #      When using the logistic function as the activation
+    #          - Correct output neuron should output .8
+    #          - All others should output .2
+    #      When using the hyperbolic tangent as the activation
+    #	   - Correct output neuron should output .6
+    #          - All other neurons should output -.6
+    ###############################################################
 
-	errors=zeros(shape=(NeuralNets_global_data.N_out,1))
+    errors=zeros(shape=(NeuralNets_global_data.N_out,1))
 
-	################################################################
-	#
-	# TO DO: Implement the backpropagation method for weight updates
-	#        as discussed in lecture. Be careful to update the
-	#        correct set of weights: W_io for networks with no
-	#        hidden layer, and W_ih, W_ho for networks with
-	#        a hidden layer.
-	################################################################
-	
-	return(errors)
+    ################################################################
+    #
+    # TO DO: Implement the backpropagation method for weight updates
+    #        as discussed in lecture. Be careful to update the
+    #        correct set of weights: W_io for networks with no
+    #        hidden layer, and W_ih, W_ho for networks with
+    #        a hidden layer.
+    ################################################################
+    return(errors)
 
