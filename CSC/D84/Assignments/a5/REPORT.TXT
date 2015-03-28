@@ -10,11 +10,11 @@ mark.
 
 ________________________________________________
 
-Student Name (last, first):
+Student Name (last, first): Mak, William
 
-Student number:
+Student number: 998992988
 
-UTORid:
+UTORid: makwill1
 
 READ THIS AND SIGN YOUR NAME AT THE END:
 
@@ -22,7 +22,7 @@ READ THIS AND SIGN YOUR NAME AT THE END:
 honesty and plaguarism. All work submitted as part
 of this assignment is my own.
 
-	Signed: _(your name goes here)__
+	Signed: _William Mak__
 
 
 (-5 marks for failing to provide the identifying
@@ -49,16 +49,18 @@ Note: Empirically, I have had success with the following parameters:
 1 .- (2.5 marks) Train a 1-layer network using the Logistic activation
                function. 
 
-		Report the learning rate used:
-		Report the threshold used:
+		Report the learning rate used: 0.8
+		Report the threshold used: 0.011
 
 		Train the network with 3 different random seeds,
 		for each seed report:
 
-		List of seeds used:
+		List of seeds used: 1236, 2222, 12
 
-		Average classification accuracy on training set:
-		Average classification accuracy on testing set:
+		Average classification accuracy on training set: 93.6698927544,
+93.6698927544, 94.0622547737
+		Average classification accuracy on testing set: 91.8753478019,
+91.8196994992, 91.9309961046
 
 		Save a screenshot of the trained network, call your
 		file:
@@ -68,15 +70,17 @@ Note: Empirically, I have had success with the following parameters:
 2 .- (2.5 marks) Repeat the process above but using a 1-layer network
 		with hyperbolic tangent activation function.
 
-		Report the learning rate used:
-		Report the threshold used:
+		Report the learning rate used: 0.88
+		Report the threshold used: 0.035
 
-		For the 3 random seeds report:
+		For the 3 random seeds report: 
 
-		List of seeds used:
+		List of seeds used: 1234
 
-		Average classification accuracy on training set:
-		Average classification accuracy on testing set:
+		Average classification accuracy on training set: 94.6900340047,
+94.2191995815, 94.0360973058
+		Average classification accuracy on testing set: 92.877017251,
+91.7640511964, 92.7657206455
 
 		Save a screenshot of the trained network, call your
 		file:
@@ -86,16 +90,18 @@ Note: Empirically, I have had success with the following parameters:
 3 .- (2.5 marks) Repeat the process above using a 2-layer network
 		with hyperbolic tangent activation function.
 
-		Report the learning rate used:
-		Report the threshold used:
-		Number of hidden units:
+		Report the learning rate used: 0.10
+		Report the threshold used: 0.035
+		Number of hidden units: 15
 
 		For the 3 random seeds report:
 
-		List of seeds used:
+		List of seeds used: 2222, 22, 21
 
-		Average classification accuracy on training set:
-		Average classification accuracy on testing set:
+		Average classification accuracy on training set: 94.2715145174,
+93.4344755428, 93.931467434
+		Average classification accuracy on testing set: 91.3745130774,
+91.4858096828, 91.5971062883
 
 		Save a screenshot of the trained network, call your
 		file:
@@ -105,16 +111,18 @@ Note: Empirically, I have had success with the following parameters:
 4 .- (2.5 marks) Repeat the process above using a 2-layer network
 		with logistic activation function.
 
-		Report the learning rate used:
-		Report the threshold used:
-		Number of hidden units:
+		Report the learning rate used: 8
+		Report the threshold used: 0.012
+		Number of hidden units: 20
 
 		For the 3 random seeds report:
 
-		List of seeds used:
+		List of seeds used: 21, 2122, 51234
 
-		Average classification accuracy on training set:
-		Average classification accuracy on testing set:
+		Average classification accuracy on training set: 84.2532042898,
+83.6269269315, 84.1685215790
+		Average classification accuracy on testing set: 80.244852532,
+79.5820387176, 80.3865829193
 
 		Save a screenshot of the trained network, call your
 		file:
@@ -123,24 +131,29 @@ Note: Empirically, I have had success with the following parameters:
 
 5 .- (5 marks) Which network architecture (number of layers/type of
 	       activation function) performs best, and why?
-
-		Here you want to discuss in terms of classification
-		accuracy, but also consider training time, ease to
-		set the network parameters (learning rate and threshold,
-		number of hidden units if applicable), and whether
-		the network seems very sensitive to the parameters
-		(e.g. unless the parameters are set to very specific
-		values the network won't learn).
+		I found a 2 layer hyperbolic performed best. The hardest part about
+setting the network parameters was to set the threshold which just took
+watching the network's squared error and looking for when it stabilized.
 
 6 .- (10 marks) Describe how you would build a network to play the cat
 	        and mouse game (move the mouse to help it survive).
 
 		- Describe what the input is in terms of a vector of
 		  values
+		I would do a feature vector. The locations of each cat, the cheese and
+the mouse. As well as the distances to between each of these and the number of
+walls.
 		- Describe what the output layer looks like (how many
 		  neurons and what they encode)
+		1. Whether the mouse survived
+		2. The number of cheese left
+		3. Distance to the cats
 		- Describe the error function
+		I would have the error function be dependent on whether or not the mouse
+survives since this is the most important feature
 		- How many layers should you use?
+		From this assignment I would have 2 layers for simplicity and because it
+seems to perform better
 
 _____________________________________________________
 
@@ -151,19 +164,19 @@ doesn't work, or what problems exist.
         	Complete/Working	Partial		Not done
 
 Logistic
- activation
+ activation			x
 
 Hyperbolic
  tangent
-  activation
+  activation		x
 
-sigmoid_prime()
+sigmoid_prime()		x
 
 Feed-Forward  
- computation
+ computation		x
 
 Training by
- back-propagation
+ back-propagation	x
 _____________________________________________________
 
 Marking:

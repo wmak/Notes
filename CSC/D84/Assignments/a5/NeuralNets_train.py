@@ -61,49 +61,28 @@
 # Starter code: F.J.E. Mar. 2013, Updated Jan. 2014
 ##########################################################
 
-import NeuralNets_global_data
+import NeuralNets_global_data as gdata
 import random
 import math
 from numpy import *
 
 def sigmoid(x):
-
-    if NeuralNets_global_data.sig_type:
+    if (gdata.sig_type):
         return(tanhyp(x))
     else:
         return(logistic(x))
 
 def logistic(x):
-##########################################################
-#
-# TO DO: Implement the Logistic function computation
-#
-##########################################################
-
-    return(0.0)
+    return (1.0)/(1.0 + math.e ** (-x))
 
 def tanhyp(x):
-##########################################################
-#
-# TO DO: Complete the hyperbolic tangent computation
-#        using exponentials.
-#
-##########################################################
-
-    return(0.0)
+    return math.tanh(x)
 
 def sigmoid_prime(a):
-##########################################################
-#
-# TO DO: Implement this function to return the derivative
-#        of the corresponding sigmoid function in terms
-#        of the output of the neuron.
-#
-##########################################################
-    if (NeuralNets_global_data.sig_type):
-        return(0.0)     # Change this as needed!
+    if (gdata.sig_type):
+        return 1.0 - a**2
     else:
-        return(0.0)     # Change this as needed
+        return a * (1 - a)
 
 def FeedForward(input_sample):
 ##########################################################
@@ -129,18 +108,23 @@ def FeedForward(input_sample):
 #       called depending on what the user specifies.
 ##########################################################
 
-    outputActivation=zeros(shape=(NeuralNets_global_data.N_out,1))		# Array of activation values for output units
-    hiddenActivation=zeros(shape=(NeuralNets_global_data.N_hidden,1))	# Array of activation values for hidden units
-    # DO remember that the last entry in hiddenActivation should be a constant
-    # bias term = 1.0!
+    # Array of activation values for output units
+    outputActivation = zeros(shape=(gdata.N_out, 1))
+    # Array of activation values for hidden units
+    hiddenActivation = zeros(shape=(gdata.N_hidden, 1))
+    sample = array(input_sample)
 
-    ##########################################################
-    #
-    # TO DO: Complete this function to compute the activation
-    #        values for each neuron in the network.
-    #
-    ##########################################################
-
+    if gdata.N_hidden:
+        for i in range(gdata.N_hidden - 1):
+            hiddenActivation[i] = sigmoid(sample.dot(gdata.W_ih[:, i]))
+        hiddenActivation[-1] = 1.0
+        for i in range(gdata.N_out):
+            outputActivation[i] = \
+            sigmoid(transpose(hiddenActivation).dot(gdata.W_ho[:, i]))
+    else:
+        for i in range(gdata.N_out):
+            # sample x W_io[column_i]
+            outputActivation[i] = sigmoid(sample.dot(gdata.W_io[:, i]))
 
     return [outputActivation,hiddenActivation]
 
@@ -187,15 +171,39 @@ def trainOneSample(input_sample, input_label):
     #          - All other neurons should output -.6
     ###############################################################
 
-    errors=zeros(shape=(NeuralNets_global_data.N_out,1))
+    errors = zeros(shape=(gdata.N_out, 1))
+    output = FeedForward(input_sample)
 
-    ################################################################
-    #
-    # TO DO: Implement the backpropagation method for weight updates
-    #        as discussed in lecture. Be careful to update the
-    #        correct set of weights: W_io for networks with no
-    #        hidden layer, and W_ih, W_ho for networks with
-    #        a hidden layer.
-    ################################################################
-    return(errors)
+    if gdata.sig_type:
+        targets = [0.6, -0.6]
+    else:
+        targets = [0.8, 0.2]
 
+    for i in range(gdata.N_out):
+        target = targets[1]
+        if i == input_label:
+            target = targets[0]
+        errors[i] = target - output[0][i]
+    
+    if gdata.N_hidden:
+        weight = zeros(shape=(gdata.N_hidden, 1))
+        for i in range(gdata.N_hidden):
+            weight[i] = 0
+            for j in range(gdata.N_out):
+                weight[i] += \
+                    gdata.W_ho[i][j] * sigmoid_prime(output[0][j]) * errors[j]
+        for i in range(gdata.N_hidden):
+            err = gdata.alpha * weight[i]
+            for j in range(gdata.N_in):
+                gdata.W_ih[j][i] += err * input_sample[j]
+        for i in range(gdata.N_out):
+            err = (gdata.alpha * sigmoid_prime(output[0][i]) * errors[i])
+            for j in range(gdata.N_hidden):
+                gdata.W_ho[j][i] += err * output[1][j]
+    else:
+        for i in range(gdata.N_out):
+            error = gdata.alpha * sigmoid_prime(output[0][i]) * errors[i]
+            for j in range(gdata.N_in):
+                gdata.W_io[j][i] += error * input_sample[j]
+
+    return errors
