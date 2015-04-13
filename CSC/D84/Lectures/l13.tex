@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\lstset{language=Python} %declare python as language
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\setcounter{totalnumber}{100}
+
+\title{L13}
+\author{William Mak}
+\date{January 05 2015}
+
+\begin{document}
+
+\maketitle
+\section{Markov Decision Process}
+\begin{enumerate}
+	\item S \- states configuration of work
+		\subitem states could be huge
+	\item A \- Actions that the agents could take
+	\item Reward function, (+) \- good
+	\item State transisition function
+		\subitem $T(s, a, s') \to$ probability
+		\subitem s \- start at state s
+		\subitem a \- action
+		\subitem s' \- resulting state
+	\item Accumulating statistics
+		\subitem our goal here is to find:
+		\subitem for each (s) what is optimal (a)
+	\item $V(s)$ value of state s
+		\subitem reward achievable by starting at s and acting optimally
+		\subitem $E(\sum_{t=0}^{\infty}{\gamma^t}$
+		\subitem $R(s,a) + \gamma\sum_{s'\in S}{T(s,a,s')V(s')}$
+		\subitem need a table Q(s,a)
+	\item
+\begin{lstlisting}
+loop until pi is good enough
+	for each s in S
+		for each a in A
+			Q(s,a) = R(s,a) + \gamma\sum_{s'\in S}{T(s,a,s')V(s')}
+			V(s) = max Q(s, a)
+			P(s) = argmax Q(s, a)
+\end{lstlisting}
+		\subitem if you don't have T(s, a, s') we have a problem
+	\item Q-learning
+		\subitem  Let Q*(s, a) \- expected discounted reward of taking action a
+		at state s
+		\subitem instead of finding optimal value of state. just use the Q table
+		\subitem
+\begin{lstlisting}
+loop from current state s
+	choose random action a \in A
+		receiver reward r, observe s'
+\end{lstlisting}
+		\subitem expereience tuple <s, a, r, s'>
+		\subitem update $Q(s,a) += \alpha(r + \gamma maxQ(s', a') - Q(s, a))$
+		\subitem $\alpha \in (0,1)$ the learning rate
+	\item notes:
+		\subitem Q(s, a) could still be too big
+		\subitem not very generalizable
+		\subitem need to be a bit smarter to reduce training time
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\lstset{language=Python} %declare python as language
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\setcounter{totalnumber}{100}
+
+\title{L12}
+\author{William Mak}
+\date{January 05 2015}
+
+\begin{document}
+
+\maketitle
+\section{Exam Questions}
+\begin{enumerate}
+\item SuppVose that i give you 3 different heuristitcs for the cat and mouse game, and then i ask you, off the heuristics i proposed. Circle the acceptable ones. And explain the unacceptable ones.
+\item Fill in a minimax tree.
+\item What are the three criteria for choosing CSP, and in what order
+\item Write pseudocode for A*
+\end{enumerate}
+\subsection{How about games with chance}
+\begin{enumerate}
+\item dice, random behaviour, noise, unknown opponent utility
+\item instead of utility, examine expected utility.
+  \subitem on average what happens?
+\item mouse, vs random cat
+  \subitem take the average of the subtrees.
+\item Expecti-Minimax
+  \subitem triplets of probability and choice
+\end{enumerate}
+
+\end{document}

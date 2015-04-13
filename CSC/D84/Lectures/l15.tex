@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\lstset{language=Python} %declare python as language
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\setcounter{totalnumber}{100}
+
+\title{L15}
+\author{William Mak}
+
+\begin{document}
+
+\maketitle
+\section{Probabilistic Reasoning}
+\begin{enumeration}
+	\item Keep track of most likely states
+	\item Random variable: variable whose value depends on a random event
+		\subitem discrete: takes on a discrete values, eg dice roll: 1...6
+		\subitem continuous: PDF function intgegrates to 1
+	\item for n variables, domain size d table has $d^n$ entries
+		can't learn joint distribution so we have to be clever
+	\item Events (start of reasoning with probability)
+		\subitem What if only know values for a subset of random variables
+	\item Conditional Distribution p(a|b) = p(a,b)/p(b)
+	\item Bayes Rule.
+\end{enumeration}
+
+\end{document}

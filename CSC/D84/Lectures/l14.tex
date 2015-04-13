@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\lstset{language=Python} %declare python as language
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\setcounter{totalnumber}{100}
+
+\title{L14}
+\author{William Mak}
+
+\begin{document}
+
+\maketitle
+\section{Q - learning}
+\begin{enumeration}
+	\item what are we learning in Q-learning ????
+	\item Knowledge about which action yields greater reward [for each state]
+		\subitem does not generalize and it can be huge
+	\item Generalizing R.L -> feature based learning
+	\item Ieda, replace state configuration with feature vector
+		\subitem ie, $S_i = [f_{1i}, f_{2i}, f_{3i}, ...]$
+	\item No more Q table
+		\subitem directly eval $Q(s_i) = w_1f_{1i} + w_2f_{2i} + ... w_kf_{ki}$
+		\subitem $ = \Sigma_{j=1}^{k} w_jf_{ji}$
+		\subitem $Q(s, a) = r + \gamma max(Q(S')) - Q(s)$
+		\subitem update: $w_i = w_i + \alpha[difference] f_i(s)$
+		\subitem stop when weight updates are tiny
+		\subitem AKA Gradient
+\end{enumeration}
+
+\end{document}
