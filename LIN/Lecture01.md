@@ -48,7 +48,7 @@
 		* The laws and rules that pertain to all human languages
 * Mental Grammar
 	* Information about sounds
-		* Their are certain sounds that can only occur in certain positions in our
+		* There are certain sounds that can only occur in certain positions in our
 		  language.
 		* We know which sounds occur in our language.
 	* Certain sequences of sounds correspond to certain meanings
